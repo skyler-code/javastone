@@ -1,0 +1,85 @@
+<%-- 
+    Document   : logCall
+    Created on : Apr 11, 2017, 3:13:32 PM
+    Author     : Dan Brown
+--%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.util.ArrayList"%>
+<%@page import="callRecord.CallType"%>
+<%@page import="callRecord.CallRecordDAO"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:useBean id="callRecord" class="callRecord.CallRecordDTO" scope="session" />
+
+<%
+    
+//Make sure an agent is logged in. Keep commented out for testing
+/**
+if(callRecord == null || callRecord.getAgent_id() < 1){
+    request.getRequestDispatcher("/index.jsp").forward(request, response);
+}
+**/
+
+//populate the call type select menu
+//CallRecordDAO callRecordDAO = new CallRecordDAO();
+//ArrayList<CallType> callTypeList //= callRecordDAO.getListCallTypes();
+    
+    
+%>
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="css/logCallCss.css" type="text/css">
+        <title>LogCall</title>
+    </head>
+    <body>
+        <header>
+            <h1>Log current call</h1>
+        </header>
+        
+        <form>
+            <section>
+            <label for="callId" id="lblCallId">Call ID</label>
+            <input name="callId" id="callId" type="text" readonly="readonly"><br>
+            </section>
+            
+            <section>
+            <label for="agentId" id="lblAgentId">Agent ID</label>
+            <input name="agentId" id="agentId" type="text" readonly="readonly"><br>
+            </section>
+            
+            <section>
+            <label for="callDescription" id="lblCallDescription">Description</label>
+            <textarea name="callDescription" id="callDescription" type="text" rows="10" cols="30" ></textarea><br>
+            </section>
+            
+            <section>
+            <label for="callTypeName" id="lblCallTypeName">Call Type</label>
+            <select name="callTypeName" id="callTypeName">
+                <c:forEach var="name" items="callTypeList">
+                    
+                </c:forEach>
+            </select><br>
+            </section>
+            
+            <section>
+            <label for="startTime" id="lblStartTime">Start Time</label>
+            <input name="startTime" id="startTime" type="text"><br>
+            </section>
+            
+            <section>
+            <label for="endTime" id="lblendTime">Call ID</label>
+            <input name="endTime" id="endTime" type="text"><br>
+            </section>
+            
+            <input type="submit" value="confirm"> 
+        </form>
+        
+        <footer>
+            
+        </footer>
+    </body>
+</html>
