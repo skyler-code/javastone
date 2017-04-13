@@ -6,6 +6,7 @@
 package login;
 
 import agent.Agent;
+import agent.Role;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -52,6 +53,7 @@ public class LoginHandler extends HttpServlet {
                 if(null == agent) {
                     message = "Invalid username or password.";
                 } else {
+                    agent.setRoles(dao.RetrieveUsersRoles(agent.getUserID()));
                     session.setAttribute("authorizedUser", agent);
                     nextLocation = "MainScreen.jsp";
                 }

@@ -13,6 +13,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <p>This is just to test that the login works for now. Should be used to show the agents main menu in future</p>
+        Welcome ${authorizedUser.firstName}! <br/>
+        <% if (authorizedUser.getRoles().contains(agent.Role.ADMINISTRATOR)){ %>
+        You shouldn't see this, unless you're an admin.
+        <% } %>
+        
     </body>
 </html>

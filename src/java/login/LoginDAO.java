@@ -6,7 +6,9 @@
 package login;
 
 import agent.Agent;
+import agent.Role;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,4 +16,5 @@ import java.sql.SQLException;
  */
 public interface LoginDAO {
     Agent getAgentByUsernameAndPassword(String username, String password) throws SQLException, ClassNotFoundException;
+    ArrayList<Role> RetrieveUsersRoles(int userID) throws SQLException, ClassNotFoundException;
 }

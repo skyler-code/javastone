@@ -6,19 +6,25 @@
 package login;
 
 import agent.Agent;
+import agent.Role;
 import database.DatabaseConnectionFactory;
 import database.DatabaseType;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
-/**
- *
- * @author Robert Forbes
- */
-public class LoginDAODB implements LoginDAO{
+public class LoginDAODB implements LoginDAO {
 
+    /**
+     * @author Robbie Forbes
+     * @param username
+     * @param password
+     * @return Agent
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
     @Override
     public Agent getAgentByUsernameAndPassword(String username, String password) throws SQLException, ClassNotFoundException {
         Agent agent = null;
@@ -50,11 +56,46 @@ public class LoginDAODB implements LoginDAO{
             city = resultSet.getString("city");
             state = resultSet.getString("state");
             zipCode = resultSet.getString("zip_code");
-            
-            agent = new Agent(userId, Username, firstName, lastName,  phoneNumber, address, city, state, zipCode);
+
+            agent = new Agent(userId, Username, firstName, lastName, phoneNumber, address, city, state, zipCode);
         }
 
         return agent;
     }
-    
+
+    /**
+     * @author Skyler Hiscock
+     * @param userID
+     * @return List of Roles
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    @Override
+    public ArrayList<Role> RetrieveUsersRoles(int userID) throws SQLException, ClassNotFoundException {
+        ArrayList<Role> roles = new ArrayList<>();
+        DatabaseConnectionFactory factory = DatabaseConnectionFactory.getInstance();
+
+        Connection conn = factory.getConnection(DatabaseType.MYSQL);
+
+        CallableStatement statement = conn.prepareCall("call sp_retrieve_users_roles(?)");
+        statement.setInt(1, userID);
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            switch (resultSet.getString("role_name")) {
+                case "Administrator":
+                    roles.add(Role.ADMINISTRATOR);
+                    break;
+                case "DataClerk":
+                    roles.add(Role.DATACLERK);
+                    break;
+                case "Agent":
+                    roles.add(Role.AGENT);
+                    break;
+                default:
+                    break;
+            }
+        }
+        return roles;
+    }
+
 }

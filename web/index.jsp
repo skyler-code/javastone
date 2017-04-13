@@ -21,7 +21,7 @@
 				
         <h1>Login</h1>
         <p>${message}</p>
-        <form action="LoginHandler" method="GET">
+        <form action="LoginHandler" method="POST">
             <label>Username: </label>
             <input type="text" name="Username"/>
             <br>

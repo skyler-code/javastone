@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package javastone.core;
+package core;
 
 import callRecord.CallType;
 import callRecord.CallTypeDAO;

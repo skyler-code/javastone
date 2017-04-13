@@ -5,6 +5,8 @@
  */
 package agent;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Robert Forbes
@@ -19,6 +21,7 @@ public class Agent {
     private String City;
     private String State;
     private String ZipCode;
+    private ArrayList<Role> Roles;
 
     public Agent() {
         this.UserID = 0;
@@ -30,6 +33,7 @@ public class Agent {
         this.City = "";
         this.State = "";
         this.ZipCode = "";
+        this.Roles = new ArrayList<>();
     }
     
     /**
@@ -181,5 +185,20 @@ public class Agent {
     public void setZipCode(String ZipCode) {
         this.ZipCode = ZipCode;
     }
+
+    /**
+     * @return the Roles
+     */
+    public ArrayList<Role> getRoles() {
+        return Roles;
+    }
+
+    /**
+     * @param Roles the Roles to set
+     */
+    public void setRoles(ArrayList<Role> Roles) {
+        this.Roles = Roles;
+    }
+    
     
 }
