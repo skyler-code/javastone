@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>DataClerkFilter</filter-name>
+        <filter-class>filter.DataClerkFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>DataClerkFilter</filter-name>
+        <url-pattern>/clerk/*</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>RequestHandler</servlet-name>
         <servlet-class>core.RequestHandler</servlet-class>
