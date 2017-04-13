@@ -3,22 +3,18 @@
     Created on : Apr 11, 2017, 3:13:32 PM
     Author     : Dan Brown
 --%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.ArrayList"%>
 <%@page import="callRecord.CallType"%>
+<%@page import="agent.Agent"%>
 <%@page import="callRecord.CallRecordDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="callRecord" class="callRecord.CallRecordDTO" scope="session" />
+<jsp:useBean id="authorizedUser" class="agent.Agent" scope="session" />
 
 <%
     
-//Make sure an agent is logged in. Keep commented out for testing
-/**
-if(callRecord == null || callRecord.getAgent_id() < 1){
-    request.getRequestDispatcher("/index.jsp").forward(request, response);
-}
-**/
-
 //populate the call type select menu
 ArrayList<CallType> callTypeList = new ArrayList<>();
 callTypeList = (ArrayList<CallType>)session.getAttribute("callTypeList");
@@ -41,12 +37,12 @@ callTypeList = (ArrayList<CallType>)session.getAttribute("callTypeList");
         <form>
             <section>
             <label for="callId" id="lblCallId">Call ID</label>
-            <input name="callId" id="callId" type="text" readonly="readonly"><br>
+            <input name="callId" id="callId" type="text" readonly="readonly" value="<c:out value="${callRecord.call_Id}" default="000000" />"><br>
             </section>
             
             <section>
             <label for="agentId" id="lblAgentId">Agent ID</label>
-            <input name="agentId" id="agentId" type="text" readonly="readonly"><br>
+            <input name="agentId" id="agentId" type="text" readonly="readonly" value="<c:out value="${authorizedUser.userID}" default="000000" />"><br>
             </section>
             
             <section>
@@ -68,13 +64,9 @@ callTypeList = (ArrayList<CallType>)session.getAttribute("callTypeList");
             
             <section>
             <label for="startTime" id="lblStartTime">Start Time</label>
-            <input name="startTime" id="startTime" type="text"><br>
+            <input name="startTime" id="startTime" type="text" readonly="readonly"><br>
             </section>
             
-            <section>
-            <label for="endTime" id="lblendTime">Call ID</label>
-            <input name="endTime" id="endTime" type="text"><br>
-            </section>
             
             <input type="submit" value="confirm"> 
         </form>
