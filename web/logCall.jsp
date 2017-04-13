@@ -3,7 +3,6 @@
     Created on : Apr 11, 2017, 3:13:32 PM
     Author     : Dan Brown
 --%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.ArrayList"%>
 <%@page import="callRecord.CallType"%>
@@ -21,9 +20,8 @@ if(callRecord == null || callRecord.getAgent_id() < 1){
 **/
 
 //populate the call type select menu
-//CallRecordDAO callRecordDAO = new CallRecordDAO();
-//ArrayList<CallType> callTypeList //= callRecordDAO.getListCallTypes();
-    
+ArrayList<CallType> callTypeList = new ArrayList<>();
+callTypeList = (ArrayList<CallType>)session.getAttribute("callTypeList");
     
 %>
 
@@ -59,8 +57,11 @@ if(callRecord == null || callRecord.getAgent_id() < 1){
             <section>
             <label for="callTypeName" id="lblCallTypeName">Call Type</label>
             <select name="callTypeName" id="callTypeName">
-                <c:forEach var="name" items="callTypeList">
-                    
+                <option value="Select">Select</option>
+                <c:forEach var="callType" items="${callTypeList}">
+                    <option value="${callType.call_type_name}">
+                        ${callType.call_type_name}
+                    </option>
                 </c:forEach>
             </select><br>
             </section>
@@ -79,7 +80,7 @@ if(callRecord == null || callRecord.getAgent_id() < 1){
         </form>
         
         <footer>
-            
+            <p>Copyright &copy; 2017 - Crisis Management System - All rights reserved</p>
         </footer>
     </body>
 </html>

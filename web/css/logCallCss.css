@@ -12,3 +12,16 @@ section{
     padding-bottom: 15px;
 }
 
+header{
+    margin-bottom: 30px; 
+    padding-bottom: 60px;
+    background-color: beige;
+}
+
+footer{
+    
+    text-align: center;
+    margin-top: 180px;
+    border-top: black solid thin;
+    padding-bottom: 50px;
+}

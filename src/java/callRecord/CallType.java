@@ -16,6 +16,9 @@ public class CallType {
      */
     private String call_type_name;
 
+    public CallType(String call_type_name) {
+        this.call_type_name = call_type_name;
+    }
     
     /**
      * @return the call_type_name

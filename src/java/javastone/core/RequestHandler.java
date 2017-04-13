@@ -5,8 +5,11 @@
  */
 package javastone.core;
 
+import callRecord.CallType;
+import callRecord.CallTypeDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -35,9 +38,21 @@ public class RequestHandler extends HttpServlet {
         String nextLocationChoice = request.getParameter("task");
         
         switch(nextLocationChoice){
+            case "logCall":
+                ArrayList<CallType> callTypeList;
+                CallTypeDAO callTypeDao = new CallTypeDAO();
+                callTypeList = callTypeDao.retrieveCallTypeList();
+                
+                request.setAttribute("callTypeList",callTypeList);
+                
+                nextLocation = "/logCall.jsp";
+                break;
             default:
                 nextLocation = "/index.jsp";
         }
+        
+        
+        
         
         // Redirect things back to the JSP specified in the switch statement
         request.getRequestDispatcher(nextLocation).forward(request, response);
