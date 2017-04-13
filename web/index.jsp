@@ -10,12 +10,25 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Login</title>
     </head>
     <body>
         <h1>Hello World!</h1>
         
         <a href="<c:url value="RequestHandler" > <c:param name="task" value="logCall" /> </c:url>" >
-                View Detail</a>
+                Log call link</a>
+				
+        <h1>Login</h1>
+        <p>${message}</p>
+        <form action="LoginHandler" method="GET">
+            <label>Username: </label>
+            <input type="text" name="Username"/>
+            <br>
+            <label>Password </label>
+            <input type="password" name="Password"/>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
     </body>
 </html>
