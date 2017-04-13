@@ -13,5 +13,13 @@
     </head>
     <body>
         <h1>Active Calls</h1>
+        <div id="calls">
+            <% for (callRecord.CallRecordDTO call
+                    : callRecord.CallRecordDAO.getOngoingCalls()) { %>
+                
+                <span><%=call.getCall_Id()%></span>
+                
+            <% } %>
+        </div>
     </body>
 </html>

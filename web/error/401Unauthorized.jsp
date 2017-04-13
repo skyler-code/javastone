@@ -13,5 +13,6 @@
     </head>
     <body>
         <h1>401 Unauthorized</h1>
+        <p>Please <a href="../index.jsp">log in</a> to view this content.</p>
     </body>
 </html>
