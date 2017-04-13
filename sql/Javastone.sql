@@ -42,7 +42,10 @@ CREATE TABLE App_User (
 ;
 
 INSERT INTO App_User (Username, Password_Hash, First_Name, Last_Name, Phone_Number, Address, City, State, Zip_Code)
-VALUES ('user', aes_encrypt('password', '123FED') , 'Susie', 'Test', '1234567890', '123 Street', 'Cityton', 'IA', '12345')
+VALUES
+('user', aes_encrypt('password', '123FED'), 'Susie', 'Test', '1234567890', '123 Street', 'Cityton', 'IA', '12345'),
+('testclerk', aes_encrypt('password', '123FED'), 'Data', 'Clerk', '1234567890', '123 Street', 'Cityton', 'IA', '12345'),
+('testagent' aes_encrypt('password', '123FED'), 'Test', 'Agent', '1234567890', '123 Street', 'Cityton', 'IA', '12345')
 ;
 
 
@@ -73,7 +76,10 @@ INSERT INTO User_Role(User_ID, Role_Name)
 VALUES
 (1, "Administrator"),
 (1, "DataClerk"),
-(1, "Agent")
+(1, "Agent"),
+(2, "DataClerk"),
+(2, "Agent"),
+(3, "Agent")
 ;
 
 CREATE TABLE Service_Category (
