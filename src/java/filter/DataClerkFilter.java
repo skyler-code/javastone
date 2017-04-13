@@ -15,6 +15,10 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import agent.*;
 
 /**
  *
@@ -106,6 +110,14 @@ public class DataClerkFilter implements Filter {
         
         Throwable problem = null;
         try {
+            HttpSession session = ((HttpServletRequest)request).getSession();
+            
+            Agent user = (Agent)session.getAttribute("authorizedUser");
+            
+            if(null == user || !user.getRoles().contains(Role.DATACLERK)) {
+                ((HttpServletResponse)response).sendRedirect("../error/401Unauthorized.jsp");
+            }
+            
             chain.doFilter(request, response);
         } catch (Throwable t) {
             // If an exception is thrown somewhere down the filter chain,
