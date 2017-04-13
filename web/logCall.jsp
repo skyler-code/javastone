@@ -59,8 +59,8 @@ callTypeList = (ArrayList<CallType>)session.getAttribute("callTypeList");
             <select name="callTypeName" id="callTypeName">
                 <option value="Select">Select</option>
                 <c:forEach var="callType" items="${callTypeList}">
-                    <option value="${callType.call_type_name}">
-                        ${callType.call_type_name}
+                    <option value="${callType.callTypeName}" title="${callType.description}">
+                        ${callType.callTypeName}
                     </option>
                 </c:forEach>
             </select><br>
