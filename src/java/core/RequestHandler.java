@@ -41,7 +41,13 @@ public class RequestHandler extends HttpServlet {
             case "logCall":
                 ArrayList<CallType> callTypeList;
                 CallTypeDAO callTypeDao = new CallTypeDAO();
-                callTypeList = callTypeDao.retrieveCallTypeList();
+                
+                try{
+                    callTypeList = callTypeDao.retrieveCallTypeList();
+                }catch(Exception ex){
+                    callTypeList = null;
+                }
+                
                 
                 request.setAttribute("callTypeList",callTypeList);
                 

@@ -14,24 +14,36 @@ public class CallType {
     /**
      * The type of call being answered
      */
-    private String call_type_name;
+    private String callTypeName;
+    
+    private String description;
 
-    public CallType(String call_type_name) {
-        this.call_type_name = call_type_name;
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+
+    public CallType(String call_type_name, String description) {
+        this.callTypeName = call_type_name;
+        this.description = description;
     }
     
     /**
-     * @return the call_type_name
+     * @return the callTypeName
      */
-    public String getCall_type_name() {
-        return call_type_name;
+    public String getCallTypeName() {
+        return callTypeName;
     }
 
     /**
-     * @param call_type_name the call_type_name to set
+     * @param callTypeName the callTypeName to set
      */
-    public void setCall_type_name(String call_type_name) {
-        this.call_type_name = call_type_name;
+    public void setCallTypeName(String callTypeName) {
+        this.callTypeName = callTypeName;
     }
     
     

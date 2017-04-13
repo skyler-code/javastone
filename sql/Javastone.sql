@@ -27,6 +27,17 @@ CREATE TABLE Call_Type (
 ) COMMENT 'A call type'
 ;
 
+INSERT INTO Call_Type (Call_Type_Name, Description)
+VALUES
+("Self Harm Threat (high)","The caller is in imminent threat of self harm"),
+("Self Harm Threat (Medium)","The caller is in potential threat of self harm"),
+("Self Harm Threat (low)","The caller is thinking about potential self harm"),
+("Drug Abuse","The caller is calling in regards to first hand drug abuse issues, not including alcohol"),
+("Alcohol Abuse","The caller is calling in regards to first hand alcohol abuse issues"),
+("Domestic Violence","The call is in regards to first hand violence within her household")
+;
+
+
 CREATE TABLE App_User (
 	User_ID INT PRIMARY KEY AUTO_INCREMENT COMMENT 'The agent primary key'
     , Username VARCHAR(50) NOT NULL COMMENT 'The username of the agent'
@@ -155,6 +166,30 @@ BEGIN
 END$$
 DELIMITER ;
 
+DELIMITER $$
+DROP PROCEDURE IF EXISTS sp_retrieve_call_type_list$$
+CREATE PROCEDURE sp_retrieve_call_type_list(
+
+)
+COMMENT 'Retrieves a list of all call types.'
+BEGIN
+	SELECT Call_Type_Name, Description
+	FROM Call_type;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS sp_retrieve_call_type_description_by_name$$
+CREATE PROCEDURE sp_retrieve_call_type_description_by_name(
+	IN p_call_type_name VARCHAR(50)
+)
+COMMENT 'Retrieves a call type description by the call type name.'
+BEGIN
+	SELECT Description
+	FROM Call_type
+    WHERE Call_Type_Name = p_call_type_name;
+END$$
+DELIMITER ;
 
 
 DROP USER IF EXISTS 'systemuser'@'%';
@@ -163,9 +198,16 @@ IDENTIFIED BY 'password'
 ;
 
 
+
 GRANT EXECUTE ON PROCEDURE Javastone.sp_authenticate_user 
 TO 'systemuser'@'%'
 ;
 GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_users_roles 
+TO 'systemuser'@'%'
+;
+GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_call_type_list
+TO 'systemuser'@'%'
+;
+GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_call_type_description_by_name
 TO 'systemuser'@'%'
 ;
