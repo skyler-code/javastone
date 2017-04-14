@@ -56,7 +56,7 @@ INSERT INTO App_User (Username, Password_Hash, First_Name, Last_Name, Phone_Numb
 VALUES
 ('user', aes_encrypt('password', '123FED'), 'Susie', 'Test', '1234567890', '123 Street', 'Cityton', 'IA', '12345'),
 ('testclerk', aes_encrypt('password', '123FED'), 'Data', 'Clerk', '1234567890', '123 Street', 'Cityton', 'IA', '12345'),
-('testagent' aes_encrypt('password', '123FED'), 'Test', 'Agent', '1234567890', '123 Street', 'Cityton', 'IA', '12345')
+('testagent', aes_encrypt('password', '123FED'), 'Test', 'Agent', '1234567890', '123 Street', 'Cityton', 'IA', '12345')
 ;
 
 

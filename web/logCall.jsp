@@ -5,6 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="java.util.ArrayList"%>
 <%@page import="callRecord.CallType"%>
 <%@page import="agent.Agent"%>
@@ -12,6 +13,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="callRecord" class="callRecord.CallRecordDTO" scope="session" />
 <jsp:useBean id="authorizedUser" class="agent.Agent" scope="session" />
+
+
 
 <%
     
@@ -64,7 +67,10 @@ callTypeList = (ArrayList<CallType>)session.getAttribute("callTypeList");
             
             <section>
             <label for="startTime" id="lblStartTime">Start Time</label>
-            <input name="startTime" id="startTime" type="text" readonly="readonly"><br>
+            
+            <c:set var="now" value="<%= new java.util.Date()%>" />
+            <input name="startTime" id="startTime" type="text" readonly="readonly" value="<fmt:formatDate type="time" 
+            value="${now}" />"><br>
             </section>
             
             
