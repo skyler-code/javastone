@@ -29,17 +29,23 @@ public class CallRecordHandler extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         HttpSession session = request.getSession();
-        //int callId = Integer.parseInt(request.getParameter("callId"));
+        
         int agentId = Integer.parseInt(request.getParameter("agentId"));
-        int callerId = Integer.parseInt(request.getParameter("callerId"));
+        int callerId = 0;
+        try{
+            callerId = Integer.parseInt(request.getParameter("callerId"));
+        }catch(NumberFormatException nfe){
+            
+        }
+        
         String callDescription = request.getParameter("callDescription");
         String callTypeName = request.getParameter("callTypeName");
         LocalDateTime startTime = LocalDateTime.parse(request.getParameter("startTime"));
         
-        String nextLocation = "/MainScreen.jsp";
+        String nextLocation = "/LogCall.jsp";
         String logCallMessage = "";
         
-        if(1 > agentId || callDescription == null || callTypeName == null || callTypeName.equalsIgnoreCase("select") || callDescription.equals("")){
+        if(1 > agentId || callerId == 0 || callDescription == null || callTypeName == null || callTypeName.equalsIgnoreCase("select") || callDescription.equals("")){
             logCallMessage = "Please ensure all fields are filled out";
         } else {
             CallRecordDTO callRecord = new CallRecordDTO();
@@ -53,17 +59,17 @@ public class CallRecordHandler extends HttpServlet {
             try{
                 int rowsAffected = CallRecordDAO.SubmitCallRecord(callRecord);
                 if(rowsAffected > 1) {
-                    nextLocation = "LogCall.jsp";
+                    nextLocation = "/LogCall.jsp";
                     logCallMessage = "Call Record Submitted Successfully.";
                 } else {
-                    nextLocation = "LogCall.jsp";
+                    nextLocation = "/LogCall.jsp";
                     logCallMessage = "There was an error logging the call. Please try again.";
                 }
             } catch(SQLException | ClassNotFoundException ex) {
                 logCallMessage = ex.getMessage();
             }
         }
-        session.setAttribute("locCallMessage", logCallMessage);
+        session.setAttribute("logCallMessage", logCallMessage);
         
         // Redirect things back to the JSP specified in the logic above
         request.getRequestDispatcher(nextLocation).forward(request, response);

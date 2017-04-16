@@ -16,6 +16,10 @@
         <servlet-name>LoginHandler</servlet-name>
         <servlet-class>login.LoginHandler</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CallRecordHandler</servlet-name>
+        <servlet-class>callRecord.CallRecordHandler</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RequestHandler</servlet-name>
         <url-pattern>/RequestHandler</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>LoginHandler</servlet-name>
         <url-pattern>/LoginHandler</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CallRecordHandler</servlet-name>
+        <url-pattern>/CallRecordHandler</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
