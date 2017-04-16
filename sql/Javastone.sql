@@ -191,6 +191,24 @@ BEGIN
 END$$
 DELIMITER ;
 
+DELIMITER $$
+DROP PROCEDURE IF EXISTS sp_create_call_record$$
+CREATE PROCEDURE sp_create_call_record(
+    IN p_user_id INT,
+    IN p_call_description VARCHAR(1000),
+    IN p_call_type_name VARCHAR(50),
+    IN p_caller_id INT,
+    IN p_start_time DATETIME
+)
+COMMENT 'Adds a new call record to the database'
+BEGIN
+	SET @end_time = CURRENT_TIME();
+	INSERT INTO Call_Record(User_ID, Call_Description, Call_Type_Name, Caller_ID, Start_Time, End_Time)
+    VALUES
+    (p_user_id, p_call_description, p_call_type_name, p_caller_id, p_start_time, end_time);
+END$$
+DELIMITER ;
+
 
 DROP USER IF EXISTS 'systemuser'@'%';
 CREATE USER 'systemuser'@'%' 
@@ -209,5 +227,8 @@ GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_call_type_list
 TO 'systemuser'@'%'
 ;
 GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_call_type_description_by_name
+TO 'systemuser'@'%'
+;
+GRANT EXECUTE ON PROCEDURE Javastone.sp_create_call_record
 TO 'systemuser'@'%'
 ;

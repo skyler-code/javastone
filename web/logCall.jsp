@@ -1,9 +1,11 @@
 <%-- 
     Document   : logCall
     Created on : Apr 11, 2017, 3:13:32 PM
+    Modified on: Apr 16, 2017, 3:40:00 PM, DB
     Author     : Dan Brown
 --%>
 
+<%@page import="java.time.LocalDateTime"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="java.util.ArrayList"%>
@@ -35,17 +37,24 @@ callTypeList = (ArrayList<CallType>)session.getAttribute("callTypeList");
     <body>
         <header>
             <h1>Log current call</h1>
+            <p style="color: red;">${logCallMessage}</p>
         </header>
         
-        <form>
+        <form action="CallRecordHandler" method="POST">
+            <%-- 
             <section>
             <label for="callId" id="lblCallId">Call ID</label>
             <input name="callId" id="callId" type="text" readonly="readonly" value="<c:out value="${callRecord.call_Id}" default="000000" />"><br>
             </section>
-            
+            --%>
             <section>
             <label for="agentId" id="lblAgentId">Agent ID</label>
             <input name="agentId" id="agentId" type="text" readonly="readonly" value="<c:out value="${authorizedUser.userID}" default="000000" />"><br>
+            </section>
+            
+            <section>
+            <label for="callerId" id="lblCallerId">Caller ID</label>
+            <input name="callerId" id="callerId" type="text" value=""><br>
             </section>
             
             <section>
@@ -68,13 +77,12 @@ callTypeList = (ArrayList<CallType>)session.getAttribute("callTypeList");
             <section>
             <label for="startTime" id="lblStartTime">Start Time</label>
             
-            <c:set var="now" value="<%= new java.util.Date()%>" />
-            <input name="startTime" id="startTime" type="text" readonly="readonly" value="<fmt:formatDate type="time" 
-            value="${now}" />"><br>
+            <c:set var="now" value="${LocalDateTime.now()}" />
+            <input name="startTime" id="startTime" type="text" readonly="readonly" value="${now}"><br>
             </section>
             
             
-            <input type="submit" value="confirm"> 
+            <input type="submit" value="confirm" > 
         </form>
         
         <footer>
