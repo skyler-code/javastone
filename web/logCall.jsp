@@ -15,16 +15,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="callRecord" class="callRecord.CallRecordDTO" scope="session" />
 <jsp:useBean id="authorizedUser" class="agent.Agent" scope="session" />
+<jsp:useBean id="caller" class="caller.caller" scope="session" />
+<jsp:useBean id="callTypeList" class="callRecord.CallTypeList" scope="session" />
 
-
-
-<%
-    
-//populate the call type select menu
-ArrayList<CallType> callTypeList = new ArrayList<>();
-callTypeList = (ArrayList<CallType>)session.getAttribute("callTypeList");
-    
-%>
 
 
 <!DOCTYPE html>

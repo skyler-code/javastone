@@ -42,7 +42,7 @@ public class CallRecordHandler extends HttpServlet {
         String callTypeName = request.getParameter("callTypeName");
         LocalDateTime startTime = LocalDateTime.parse(request.getParameter("startTime"));
         
-        String nextLocation = "/LogCall.jsp";
+        String nextLocation = "/logCall.jsp";
         String logCallMessage = "";
         
         if(1 > agentId || callerId == 0 || callDescription == null || callTypeName == null || callTypeName.equalsIgnoreCase("select") || callDescription.equals("")){
@@ -59,10 +59,10 @@ public class CallRecordHandler extends HttpServlet {
             try{
                 int rowsAffected = CallRecordDAO.SubmitCallRecord(callRecord);
                 if(rowsAffected > 1) {
-                    nextLocation = "/LogCall.jsp";
+                    nextLocation = "/logCall.jsp";
                     logCallMessage = "Call Record Submitted Successfully.";
                 } else {
-                    nextLocation = "/LogCall.jsp";
+                    nextLocation = "/logCall.jsp";
                     logCallMessage = "There was an error logging the call. Please try again.";
                 }
             } catch(SQLException | ClassNotFoundException ex) {
