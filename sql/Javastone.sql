@@ -13,11 +13,10 @@ USE Javastone;
 
 
 CREATE TABLE Caller (
-	Caller_ID INT PRIMARY KEY AUTO_INCREMENT COMMENT 'The caller record primary key'
+	PhoneNumber VARCHAR(10) PRIMARY KEY COMMENT 'The caller record primary key / Phone number'
     , Caller_Notes VARCHAR(1000) NOT NULL COMMENT 'A description of the caller'
     , First_Name VARCHAR(100) NOT NULL COMMENT 'The first name of the caller'
     , Last_Name VARCHAR(100) NOT NULL COMMENT 'The last name of the caller'
-    , PhoneNumber VARCHAR(10) NOT NULL COMMENT 'The phone number of the caller'
 ) COMMENT 'A caller record'
 ;
 
@@ -111,11 +110,11 @@ CREATE TABLE Call_Record (
     , User_ID INT NOT NULL COMMENT 'The id of the user associated with the call'
     , Call_Description VARCHAR(1000) NOT NULL COMMENT 'A description of the call'
     , Call_Type_Name VARCHAR(50) NOT NULL COMMENT 'The id of the type of call'
-    , Caller_ID INT NOT NULL COMMENT 'The id of the caller associated with the call'
+    , Caller_ID VARCHAR(10) NOT NULL COMMENT 'The id of the caller associated with the call'
     , Start_Time DATETIME NOT NULL COMMENT 'The start time of the call'
     , End_Time DATETIME NOT NULL COMMENT 'The end time of the call'
     , FOREIGN KEY (Call_Type_Name) REFERENCES Call_Type(Call_Type_Name)
-    , FOREIGN KEY (Caller_ID) REFERENCES Caller(Caller_ID)
+    , FOREIGN KEY (Caller_ID) REFERENCES Caller(PhoneNumber)
     , FOREIGN KEY (User_ID) REFERENCES App_User(User_ID)
 ) COMMENT 'A record for a single call'
 ;
