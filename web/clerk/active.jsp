@@ -4,6 +4,8 @@
     Author     : nh228u15
 --%>
 
+<%@page import="java.time.Duration"%>
+<%@page import="java.time.LocalDateTime"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,13 +15,18 @@
     </head>
     <body>
         <h1>Active Calls</h1>
-        <div id="calls">
+        <table id="calls">
+                <tr class="head">
+                    <td>Call ID</td>
+                    <td>Duration</td>
+                </tr>
             <% for (callRecord.CallRecordDTO call
                     : callRecord.CallRecordDAO.getOngoingCalls()) { %>
-                
-                <span><%=call.getCall_Id()%></span>
-                
+                <tr>
+                    <td><%=call.getCall_Id()%></td>
+                    <td><%=Duration.between(call.getStart_time(), LocalDateTime.now()).toString()%></td>
+                </tr>
             <% } %>
-        </div>
+        </table>
     </body>
 </html>
