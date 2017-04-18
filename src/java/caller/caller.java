@@ -14,7 +14,7 @@ public class caller {
     /**
      * The unique identifier. The number the caller is using to contact us
      */
-    private int phoneNumber;
+    private String phoneNumber = "";
     
     /**
      * Any notes in reference to this caller
@@ -32,13 +32,13 @@ public class caller {
     private String lastname = null;
 
     public caller() {
-        this.phoneNumber = 0;
+        this.phoneNumber = "";
         this.callerNotes = "";
         this.firstname = "";
         this.lastname = "";
     }
     
-    public caller(int phone, String notes, String first, String last) {
+    public caller(String phone, String notes, String first, String last) {
         this.phoneNumber = phone;
         this.callerNotes = notes;
         this.firstname = first;
@@ -46,11 +46,11 @@ public class caller {
     }
 
     
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

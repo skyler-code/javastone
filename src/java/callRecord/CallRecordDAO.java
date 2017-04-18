@@ -46,11 +46,11 @@ public class CallRecordDAO {
         // todo query database for any call with non-null start and null end
         
         // int callId, int agentId, String callDescription, String callTypeName, LocalDateTime startTime, LocalDateTime endTime
-        calls.add(new CallRecordDTO(100001, 100001, 100001, "Test Call", "Test", LocalDateTime.now(), null));
-        calls.add(new CallRecordDTO(100002, 100001, 100002, "Test Call", "Test", LocalDateTime.now(), null));
-        calls.add(new CallRecordDTO(100003, 100002, 100003, "Test Call", "Test", LocalDateTime.now(), null));
-        calls.add(new CallRecordDTO(100004, 100002, 100004, "Test Call", "Test", LocalDateTime.now(), null));
-        calls.add(new CallRecordDTO(100005, 100004, 100005, "Test Call", "Test", LocalDateTime.now(), null));
+        calls.add(new CallRecordDTO(100001, 100001, "100001", "Test Call", "Test", LocalDateTime.now(), null));
+        calls.add(new CallRecordDTO(100002, 100001, "100002", "Test Call", "Test", LocalDateTime.now(), null));
+        calls.add(new CallRecordDTO(100003, 100002, "100003", "Test Call", "Test", LocalDateTime.now(), null));
+        calls.add(new CallRecordDTO(100004, 100002, "100004", "Test Call", "Test", LocalDateTime.now(), null));
+        calls.add(new CallRecordDTO(100005, 100004, "100005", "Test Call", "Test", LocalDateTime.now(), null));
         
         return calls;
     }
@@ -76,10 +76,10 @@ public class CallRecordDAO {
         statement.setInt(1, record.getAgent_id());
         statement.setString(2, record.getCall_description());
         statement.setString(3, record.getCall_type_name());
-        statement.setInt(4, record.getCaller_Id());
+        statement.setString(4, record.getCaller_Id());
         statement.setTimestamp(5, Timestamp.valueOf(record.getStart_time()));
-        
         rowsAffected = statement.executeUpdate();
+        System.out.println(rowsAffected);
         
         
         return rowsAffected;

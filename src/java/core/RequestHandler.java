@@ -39,18 +39,6 @@ public class RequestHandler extends HttpServlet {
         
         switch(nextLocationChoice){
             case "logCall":
-                ArrayList<CallType> callTypeList;
-                CallTypeDAO callTypeDao = new CallTypeDAO();
-                
-                try{
-                    callTypeList = callTypeDao.retrieveCallTypeList();
-                }catch(Exception ex){
-                    callTypeList = null;
-                }
-                
-                
-                request.setAttribute("callTypeList",callTypeList);
-                
                 nextLocation = "/logCall.jsp";
                 break;
             default:

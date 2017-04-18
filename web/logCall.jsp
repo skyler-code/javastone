@@ -19,7 +19,6 @@
 <jsp:useBean id="callTypeList" class="callRecord.CallTypeList" scope="session" />
 
 
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -46,8 +45,8 @@
             </section>
             
             <section>
-            <label for="callerId" id="lblCallerId">Caller ID</label>
-            <input name="callerId" id="callerId" type="text" value=""><br>
+            <label for="callerPhone" id="lblCallerPhone">Caller Phone</label>
+            <input name="callerPhone" id="callerPhone" type="text" value="${caller.phoneNumber}" readonly="readonly"><br>
             </section>
             
             <section>
@@ -59,7 +58,7 @@
             <label for="callTypeName" id="lblCallTypeName">Call Type</label>
             <select name="callTypeName" id="callTypeName">
                 <option value="Select">Select</option>
-                <c:forEach var="callType" items="${callTypeList}">
+                <c:forEach var="callType" items="${callTypeList.callTypeList}">
                     <option value="${callType.callTypeName}" title="${callType.description}">
                         ${callType.callTypeName}
                     </option>

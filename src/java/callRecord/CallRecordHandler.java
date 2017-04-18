@@ -31,13 +31,7 @@ public class CallRecordHandler extends HttpServlet {
         HttpSession session = request.getSession();
         
         int agentId = Integer.parseInt(request.getParameter("agentId"));
-        int callerId = 0;
-        try{
-            callerId = Integer.parseInt(request.getParameter("callerId"));
-        }catch(NumberFormatException nfe){
-            
-        }
-        
+        String phoneNumber = request.getParameter("callerPhone");
         String callDescription = request.getParameter("callDescription");
         String callTypeName = request.getParameter("callTypeName");
         LocalDateTime startTime = LocalDateTime.parse(request.getParameter("startTime"));
@@ -45,20 +39,20 @@ public class CallRecordHandler extends HttpServlet {
         String nextLocation = "/logCall.jsp";
         String logCallMessage = "";
         
-        if(1 > agentId || callerId == 0 || callDescription == null || callTypeName == null || callTypeName.equalsIgnoreCase("select") || callDescription.equals("")){
+        if(1 > agentId || phoneNumber.equals("") || phoneNumber == null || callDescription == null || callTypeName == null || callTypeName.equalsIgnoreCase("select") || callDescription.equals("")){
             logCallMessage = "Please ensure all fields are filled out";
         } else {
             CallRecordDTO callRecord = new CallRecordDTO();
                 //callRecord.setCall_Id(callId);
                 callRecord.setAgent_id(agentId);
-                callRecord.setCaller_Id(callerId);
+                callRecord.setCaller_Id(phoneNumber);
                 callRecord.setCall_description(callDescription);
                 callRecord.setCall_type_name(callTypeName);
                 callRecord.setStart_time(startTime);
             
             try{
                 int rowsAffected = CallRecordDAO.SubmitCallRecord(callRecord);
-                if(rowsAffected > 1) {
+                if(rowsAffected != 0) {
                     nextLocation = "/logCall.jsp";
                     logCallMessage = "Call Record Submitted Successfully.";
                 } else {
@@ -66,7 +60,7 @@ public class CallRecordHandler extends HttpServlet {
                     logCallMessage = "There was an error logging the call. Please try again.";
                 }
             } catch(SQLException | ClassNotFoundException ex) {
-                logCallMessage = ex.getMessage();
+                logCallMessage = "The phone number entered does not refer to a valid caller phone in the database.";
             }
         }
         session.setAttribute("logCallMessage", logCallMessage);

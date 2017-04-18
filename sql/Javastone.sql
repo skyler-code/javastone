@@ -13,7 +13,7 @@ USE Javastone;
 
 
 CREATE TABLE Caller (
-	PhoneNumber VARCHAR(10) PRIMARY KEY COMMENT 'The caller record primary key / Phone number'
+	Caller_Phone VARCHAR(10) PRIMARY KEY COMMENT 'The caller record primary key / Phone number'
     , Caller_Notes VARCHAR(1000) NOT NULL COMMENT 'A description of the caller'
     , First_Name VARCHAR(100) NOT NULL COMMENT 'The first name of the caller'
     , Last_Name VARCHAR(100) NOT NULL COMMENT 'The last name of the caller'
@@ -110,11 +110,11 @@ CREATE TABLE Call_Record (
     , User_ID INT NOT NULL COMMENT 'The id of the user associated with the call'
     , Call_Description VARCHAR(1000) NOT NULL COMMENT 'A description of the call'
     , Call_Type_Name VARCHAR(50) NOT NULL COMMENT 'The id of the type of call'
-    , Caller_ID VARCHAR(10) NOT NULL COMMENT 'The id of the caller associated with the call'
+    , Caller_Phone VARCHAR(10) NOT NULL COMMENT 'The caller record primary key / Phone number'
     , Start_Time DATETIME NOT NULL COMMENT 'The start time of the call'
     , End_Time DATETIME NOT NULL COMMENT 'The end time of the call'
     , FOREIGN KEY (Call_Type_Name) REFERENCES Call_Type(Call_Type_Name)
-    , FOREIGN KEY (Caller_ID) REFERENCES Caller(PhoneNumber)
+    , FOREIGN KEY (Caller_Phone) REFERENCES Caller(Caller_Phone)
     , FOREIGN KEY (User_ID) REFERENCES App_User(User_ID)
 ) COMMENT 'A record for a single call'
 ;
@@ -196,15 +196,16 @@ CREATE PROCEDURE sp_create_call_record(
     IN p_user_id INT,
     IN p_call_description VARCHAR(1000),
     IN p_call_type_name VARCHAR(50),
-    IN p_caller_id INT,
+    IN p_caller_phone VARCHAR(10),
     IN p_start_time DATETIME
 )
 COMMENT 'Adds a new call record to the database'
 BEGIN
 	SET @end_time = CURRENT_TIME();
-	INSERT INTO Call_Record(User_ID, Call_Description, Call_Type_Name, Caller_ID, Start_Time, End_Time)
+	INSERT INTO Call_Record(User_ID, Call_Description, Call_Type_Name, Caller_Phone, Start_Time, End_Time)
     VALUES
-    (p_user_id, p_call_description, p_call_type_name, p_caller_id, p_start_time, end_time);
+    (p_user_id, p_call_description, p_call_type_name, p_caller_phone, p_start_time, end_time);
+	SELECT row_count();
 END$$
 DELIMITER ;
 

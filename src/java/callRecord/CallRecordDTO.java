@@ -26,7 +26,7 @@ public class CallRecordDTO {
     /**
      * The unique identifier for the individual calling the crisis center
      */
-    private int caller_id = 0;
+    private String caller_id = "";
     
     /**
      * The summary of the call
@@ -54,7 +54,7 @@ public class CallRecordDTO {
     
     
     
-    public CallRecordDTO(int callId, int agentId, int callerId, String callDescription, String callTypeName, LocalDateTime startTime, LocalDateTime endTime) {
+    public CallRecordDTO(int callId, int agentId, String callerId, String callDescription, String callTypeName, LocalDateTime startTime, LocalDateTime endTime) {
         
         this.call_Id = callId;
         this.agent_id = agentId;
@@ -101,7 +101,7 @@ public class CallRecordDTO {
      * Get the unique identifier for the individual calling the crisis center
      * @return caller_id int.
      */
-    public int getCaller_Id() {
+    public String getCaller_Id() {
         return caller_id;
     }
 
@@ -109,7 +109,7 @@ public class CallRecordDTO {
      * Set the unique identifier for the individual calling the crisis center
      * @param caller_id 
      */
-    public void setCaller_Id(int caller_id) {
+    public void setCaller_Id(String caller_id) {
         this.caller_id = caller_id;
     }
     

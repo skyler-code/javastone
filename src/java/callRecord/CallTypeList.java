@@ -6,6 +6,7 @@
 package callRecord;
 
 import callRecord.CallType;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -16,20 +17,13 @@ public class CallTypeList {
     
     ArrayList<CallType> callTypeList = null;
 
-    public CallTypeList() {
-        callTypeList = new ArrayList<>();
-    }
-    
-    public CallTypeList(ArrayList<CallType> list) {
-        callTypeList = list;
+    public CallTypeList() throws SQLException, ClassNotFoundException {
+        CallTypeDAO callTypeDAO = new CallTypeDAO();
+        this.callTypeList = callTypeDAO.retrieveCallTypeList();
     }
 
     public ArrayList<CallType> getCallTypeList() {
         return callTypeList;
-    }
-
-    public void setCallTypeList(ArrayList<CallType> callTypeList) {
-        this.callTypeList = callTypeList;
     }
     
     
