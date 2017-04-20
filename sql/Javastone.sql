@@ -105,8 +105,7 @@ VALUES
 ;
 
 CREATE TABLE Service_Category (
-	Service_Category_ID INT PRIMARY KEY AUTO_INCREMENT COMMENT 'The service category primary key'
-    , Service_Category_Name VARCHAR(100) COMMENT 'The name of the service category'
+      Service_Category_Name VARCHAR(100) PRIMARY KEY COMMENT 'The name of the service category'
     , Description VARCHAR(500) NOT NULL COMMENT 'Description of the service category'
 ) COMMENT 'A service category'
 ;
@@ -122,10 +121,10 @@ VALUES
 
 CREATE TABLE Service_Provider (
 	Service_Provider_ID INT PRIMARY KEY AUTO_INCREMENT COMMENT 'The service provider primary key'
-    , Service_Category_ID INT NOT NULL COMMENT 'The category for the service provider'
+    , Service_Category_Name VARCHAR(100) NOT NULL COMMENT 'The category for the service provider'
 	, Service_Provider_Name VARCHAR(100) NOT NULL COMMENT 'Service provider name'
 	, Service_Provider_Phone_Number VARCHAR(10) COMMENT 'Service provider phone number'
-    , FOREIGN KEY (Service_Category_ID) REFERENCES Service_Category(Service_Category_ID)
+    , FOREIGN KEY (Service_Category_Name) REFERENCES Service_Category(Service_Category_Name)
 ) COMMENT 'A service provider'
 ;
 
@@ -234,6 +233,15 @@ END$$
 DELIMITER ;
 
 DELIMITER $$
+DROP PROCEDURE IF EXISTS sp_retrieve_service_categories$$
+CREATE PROCEDURE sp_retrieve_service_categories(
+)
+COMMENT 'Retrieves a list of all service categories.'
+BEGIN
+	SELECT Service_Category_Name, Description
+	FROM Service_Category;
+END$$
+
 DROP PROCEDURE IF EXISTS sp_retrieve_call_records_by_userId$$
 CREATE PROCEDURE sp_retrieve_call_records_by_userId(
 	IN p_user_id INT
@@ -278,6 +286,9 @@ GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_call_type_description_by_name
 TO 'systemuser'@'%'
 ;
 GRANT EXECUTE ON PROCEDURE Javastone.sp_create_call_record
+TO 'systemuser'@'%'
+;
+GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_service_categories
 TO 'systemuser'@'%'
 ;
 GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_call_records_by_userId

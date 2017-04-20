@@ -10,9 +10,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="css/navbar.css">
         <title>JSP Page</title>
     </head>
     <body>
+        <jsp:include page="includes/navbar.jsp" />
         Welcome ${authorizedUser.firstName}! <br/>
         <% if (authorizedUser.getRoles().contains(agent.Role.ADMINISTRATOR)){ %>
         You shouldn't see this, unless you're an admin.
