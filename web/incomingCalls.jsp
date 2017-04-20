@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="callList" class="calls.IncomingCallList" scope="session" />
 <!DOCTYPE html>
 <html>
@@ -18,8 +19,8 @@
             <h1>Incoming calls</h1>
         </header>
         <section>
-            <c:forEach var="call" items="${callList}">
-                <h3>${call.PhoneNumber}</h3>
+            <c:forEach var="call" items="${callList.incomingCallList}">
+                ${call.phoneNumber}
             </c:forEach>
         </section>
         <footer>

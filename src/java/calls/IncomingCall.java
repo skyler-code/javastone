@@ -14,21 +14,21 @@ public class IncomingCall {
     /**
      * Number of the phone calling the call center
      */
-    private String PhoneNumber = "";
+    private String phoneNumber = "";
 
     public IncomingCall(String PhoneNumber) {
-        this.PhoneNumber = PhoneNumber;
+        this.phoneNumber = PhoneNumber;
     }
 
     public IncomingCall() {
     }
 
     public String getPhoneNumber() {
-        return PhoneNumber;
+        return phoneNumber;
     }
 
-    public void setPhoneNumber(String PhoneNumber) {
-        this.PhoneNumber = PhoneNumber;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
     
     

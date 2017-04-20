@@ -33,7 +33,6 @@ public class IncomingCallDAO {
         Connection conn = factory.getConnection(DatabaseType.MYSQL);
         CallableStatement statement = conn.prepareCall("call sp_retrieve_calls");
         
-        String phoneNumber;
         
         ResultSet results = statement.executeQuery();
         
