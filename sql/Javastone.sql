@@ -36,6 +36,18 @@ VALUES
 ("Domestic Violence","The call is in regards to first hand violence within her household")
 ;
 
+CREATE TABLE Incoming_Call (
+	Phone_Number VARCHAR(10) PRIMARY KEY COMMENT 'The number calling the call center'
+) COMMENT 'A call'
+;
+
+INSERT INTO Incoming_Call (Phone_Number)
+VALUES
+("3191112316"),
+("5512345695"),
+("9915623455"),
+("3192203056")
+;
 
 CREATE TABLE App_User (
 	User_ID INT PRIMARY KEY AUTO_INCREMENT COMMENT 'The agent primary key'
@@ -234,6 +246,18 @@ BEGIN
 END$$
 DELIMITER ;
 
+DELIMITER $$
+DROP PROCEDURE IF EXISTS sp_retrieve_calls$$
+CREATE PROCEDURE sp_retrieve_calls(
+)
+COMMENT 'Retrieves all incoming calls' 
+BEGIN
+	SELECT Phone_Number
+	FROM Incoming_Call;
+END$$
+DELIMITER ;
+
+
 DROP USER IF EXISTS 'systemuser'@'%';
 CREATE USER 'systemuser'@'%' 
 IDENTIFIED BY 'password' 
@@ -257,5 +281,8 @@ GRANT EXECUTE ON PROCEDURE Javastone.sp_create_call_record
 TO 'systemuser'@'%'
 ;
 GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_call_records_by_userId
+TO 'systemuser'@'%'
+;
+GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_calls
 TO 'systemuser'@'%'
 ;
