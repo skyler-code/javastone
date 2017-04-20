@@ -14,8 +14,9 @@
     </head>
     <body>
         Welcome ${authorizedUser.firstName}! <br/>
-        <% if (authorizedUser.getRoles().contains(agent.Role.DATACLERK)){ %>
-        You shouldn't see this, unless you're an data clerk.
-        <% } %>        
+        <form>
+            <label for="newAccount">Add New Account</label>
+            <input type="submit" name="newAccount"/>
+        </form>     
     </body>
 </html>

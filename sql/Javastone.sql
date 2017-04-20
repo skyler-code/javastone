@@ -36,18 +36,6 @@ VALUES
 ("Domestic Violence","The call is in regards to first hand violence within her household")
 ;
 
-CREATE TABLE Incoming_Call (
-	Phone_Number VARCHAR(10) PRIMARY KEY COMMENT 'The number calling the call center'
-) COMMENT 'A call'
-;
-
-INSERT INTO Incoming_Call (Phone_Number)
-VALUES
-("3191112316"),
-("5512345695"),
-("9915623455"),
-("3192203056")
-;
 
 CREATE TABLE App_User (
 	User_ID INT PRIMARY KEY AUTO_INCREMENT COMMENT 'The agent primary key'
@@ -105,7 +93,8 @@ VALUES
 ;
 
 CREATE TABLE Service_Category (
-      Service_Category_Name VARCHAR(100) PRIMARY KEY COMMENT 'The name of the service category'
+	Service_Category_ID INT PRIMARY KEY AUTO_INCREMENT COMMENT 'The service category primary key'
+    , Service_Category_Name VARCHAR(100) COMMENT 'The name of the service category'
     , Description VARCHAR(500) NOT NULL COMMENT 'Description of the service category'
 ) COMMENT 'A service category'
 ;
@@ -121,10 +110,10 @@ VALUES
 
 CREATE TABLE Service_Provider (
 	Service_Provider_ID INT PRIMARY KEY AUTO_INCREMENT COMMENT 'The service provider primary key'
-    , Service_Category_Name VARCHAR(100) NOT NULL COMMENT 'The category for the service provider'
+    , Service_Category_ID INT NOT NULL COMMENT 'The category for the service provider'
 	, Service_Provider_Name VARCHAR(100) NOT NULL COMMENT 'Service provider name'
 	, Service_Provider_Phone_Number VARCHAR(10) COMMENT 'Service provider phone number'
-    , FOREIGN KEY (Service_Category_Name) REFERENCES Service_Category(Service_Category_Name)
+    , FOREIGN KEY (Service_Category_ID) REFERENCES Service_Category(Service_Category_ID)
 ) COMMENT 'A service provider'
 ;
 
@@ -233,15 +222,30 @@ END$$
 DELIMITER ;
 
 DELIMITER $$
-DROP PROCEDURE IF EXISTS sp_retrieve_service_categories$$
-CREATE PROCEDURE sp_retrieve_service_categories(
+DROP PROCEDURE IF EXISTS sp_create_new_user$$
+CREATE PROCEDURE sp_create_new_user(
+	IN p_user_id INT,
+    IN p_username VARCHAR(50),
+    IN p_password_hash VARCHAR(500),
+    IN p_first_name VARCHAR(50),
+    IN p_last_name VARCHAR(100),
+    IN p_phone_number VARCHAR(20),
+    IN p_address VARCHAR(100),
+    IN p_city VARCHAR(100),
+    IN p_state VARCHAR(2),
+    IN p_zip_code VARCHAR(10)
 )
-COMMENT 'Retrieves a list of all service categories.'
+COMMENT 'Adds a new user to the database'
 BEGIN
-	SELECT Service_Category_Name, Description
-	FROM Service_Category;
-END$$
+	INSERT INTO App_User(User_ID, USERNAME, Password_Hash, First_Name, Last_Name, Phone_Number, Address, City, State, Zip)
+    VALUES
+    (p-user_id, p_username, p_password_hash, p_first_name, p_last_name, p_phone_number, p_address, p_city, p_state, p_zip_code);
+    SELECt row_count();
+END $$
+DELIMITER ;
 
+
+DELIMITER $$
 DROP PROCEDURE IF EXISTS sp_retrieve_call_records_by_userId$$
 CREATE PROCEDURE sp_retrieve_call_records_by_userId(
 	IN p_user_id INT
@@ -253,18 +257,6 @@ BEGIN
 	WHERE User_ID = p_user_id;
 END$$
 DELIMITER ;
-
-DELIMITER $$
-DROP PROCEDURE IF EXISTS sp_retrieve_calls$$
-CREATE PROCEDURE sp_retrieve_calls(
-)
-COMMENT 'Retrieves all incoming calls' 
-BEGIN
-	SELECT Phone_Number
-	FROM Incoming_Call;
-END$$
-DELIMITER ;
-
 
 DROP USER IF EXISTS 'systemuser'@'%';
 CREATE USER 'systemuser'@'%' 
@@ -288,12 +280,6 @@ TO 'systemuser'@'%'
 GRANT EXECUTE ON PROCEDURE Javastone.sp_create_call_record
 TO 'systemuser'@'%'
 ;
-GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_service_categories
-TO 'systemuser'@'%'
-;
 GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_call_records_by_userId
-TO 'systemuser'@'%'
-;
-GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_calls
 TO 'systemuser'@'%'
 ;

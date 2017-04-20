@@ -20,5 +20,6 @@
     <li><a href="index.jsp"><%= authorizedUser.getFirstName() %></a></li>
     <% } else { %>
     <li><a href="index.jsp">Login</a></li>
+    <li><a href="dataClerkMain.jsp">Data Clerk</a></li>
     <% } %>
 </div>
