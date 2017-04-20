@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class IncomingCallList {
     
-    ArrayList<IncomingCall> incomingCallList = null;
+    private ArrayList<IncomingCall> incomingCallList = null;
 
     public IncomingCallList() throws SQLException, ClassNotFoundException {
         IncomingCallDAO incomingCallDao = new IncomingCallDAO();
