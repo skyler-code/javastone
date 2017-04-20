@@ -41,6 +41,9 @@ public class RequestHandler extends HttpServlet {
             case "logCall":
                 nextLocation = "/logCall.jsp";
                 break;
+            case "dataClerkMain":
+                nextLocation = "/dataClerkMain.jsp";
+                break;
             default:
                 nextLocation = "/index.jsp";
         }

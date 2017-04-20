@@ -19,9 +19,11 @@
         <jsp:include page="includes/navbar.jsp"/>
         <a href="<c:url value="RequestHandler" > <c:param name="task" value="logCall" /> </c:url>" >
                 Log call link</a>
-				
-        <h1>Login</h1>
-        <p>${message}</p>
+        <a href="<c:url value="RequestHandler" ><c:param name="task" value="dataClerkMain" /></c:url>" >
+            Data Clerk Main</a>
+
+            <h1>Login</h1>
+            <p>${message}</p>
         <form action="LoginHandler" method="POST">
             <label>Username: </label>
             <input type="text" name="Username"/>
