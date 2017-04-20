@@ -229,6 +229,17 @@ BEGIN
 	SELECT Service_Category_Name, Description
 	FROM Service_Category;
 END$$
+
+DROP PROCEDURE IF EXISTS sp_retrieve_call_records_by_userId$$
+CREATE PROCEDURE sp_retrieve_call_records_by_userId(
+	IN p_user_id INT
+)
+COMMENT 'Retrieves all call records submitted by a specific userId' 
+BEGIN
+	SELECT Call_ID, Call_Description, Call_Type_Name, Caller_Phone, Start_Time, End_Time
+	FROM Call_Record
+	WHERE User_ID = p_user_id;
+END$$
 DELIMITER ;
 
 DROP USER IF EXISTS 'systemuser'@'%';
@@ -254,5 +265,8 @@ GRANT EXECUTE ON PROCEDURE Javastone.sp_create_call_record
 TO 'systemuser'@'%'
 ;
 GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_service_categories
+TO 'systemuser'@'%'
+;
+GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_call_records_by_userId
 TO 'systemuser'@'%'
 ;
