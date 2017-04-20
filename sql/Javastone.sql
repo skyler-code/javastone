@@ -98,9 +98,20 @@ CREATE TABLE Service_Category (
 ) COMMENT 'A service category'
 ;
 
+INSERT INTO Service_Category (Service_Category_ID, Description)
+VALUES
+("Suicide","If a caller is feeling suicidal"),
+("Homeless Shelter", "Caller needs a place to stay"),
+("Domestic Abuse", "Caller feels unsafe at home with significant other"),
+("Natural Disaster", "Caller is unsafe due to weather disaster"),
+("Medical Emergency","Caller needs immediate medical attention")
+;
+
 CREATE TABLE Service_Provider (
 	Service_Provider_ID INT PRIMARY KEY AUTO_INCREMENT COMMENT 'The service provider primary key'
     , Service_Category_ID INT NOT NULL COMMENT 'The category for the service provider'
+	, Service_Provider_Name VARCHAR(100) NOT NULL COMMENT 'Service provider name'
+	, Service_Provider_Phone_Number VARCHAR(10) COMMENT 'Service provider phone number'
     , FOREIGN KEY (Service_Category_ID) REFERENCES Service_Category(Service_Category_ID)
 ) COMMENT 'A service provider'
 ;
