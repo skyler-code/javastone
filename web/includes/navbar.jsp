@@ -16,6 +16,9 @@
     <% if (authorizedUser.getRoles().contains(agent.Role.AGENT)) { %>
     <li><a href="logCall.jsp">Log</a></li>
     <% } %>
+    <% if (authorizedUser.getRoles().contains(agent.Role.AGENT)) { %>
+    <li><a href="incomingCalls.jsp">Incoming</a></li>
+    <% } %>
     <% if (authorizedUser != null & authorizedUser.getFirstName().length() > 0) { %>
     <li><a href="index.jsp"><%= authorizedUser.getFirstName() %></a></li>
     <% } else { %>
