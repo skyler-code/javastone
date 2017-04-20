@@ -9,19 +9,19 @@
 
 <div id="navbar">
     <ul>
-    <li><a href="MainScreen.jsp">Main</a></li>
+    <li><a href="/JavaStone/MainScreen.jsp">Main</a></li>
     <% if (authorizedUser.getRoles().contains(agent.Role.DATACLERK)) { %>
-    <li><a href="clerk/active.jsp">Ongoing</a></li>
+    <li><a href="/JavaStone/clerk/active.jsp">Ongoing</a></li>
     <% } %>
     <% if (authorizedUser.getRoles().contains(agent.Role.AGENT)) { %>
-    <li><a href="logCall.jsp">Log</a></li>
+    <li><a href="/JavaStone/logCall.jsp">Log</a></li>
     <% } %>
     <% if (authorizedUser.getRoles().contains(agent.Role.AGENT)) { %>
-    <li><a href="incomingCalls.jsp">Incoming</a></li>
+    <li><a href="/JavaStone/incomingCalls.jsp">Incoming</a></li>
     <% } %>
     <% if (authorizedUser != null & authorizedUser.getFirstName().length() > 0) { %>
-    <li><a href="index.jsp"><%= authorizedUser.getFirstName() %></a></li>
+    <li><a href="/JavaStone/index.jsp"><%= authorizedUser.getFirstName() %></a></li>
     <% } else { %>
-    <li><a href="index.jsp">Login</a></li>
+    <li><a href="/JavaStone/index.jsp">Login</a></li>
     <% } %>
 </div>

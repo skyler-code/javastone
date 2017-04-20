@@ -13,7 +13,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Active Calls</title>
-        <link rel="stylesheet" href="css/navbar.css">
+        <link rel="stylesheet" href="../css/navbar.css">
     </head>
     <body>
         <jsp:include page="../includes/navbar.jsp"/>
