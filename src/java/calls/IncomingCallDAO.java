@@ -9,6 +9,7 @@ import database.DatabaseConnectionFactory;
 import database.DatabaseType;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -25,12 +26,22 @@ public class IncomingCallDAO {
      * @throws java.lang.ClassNotFoundException 
      */
     public ArrayList<IncomingCall> getIncomingCalls() throws SQLException, ClassNotFoundException{
-        ArrayList<IncomingCall> callList = null;
+        ArrayList<IncomingCall> callList = new ArrayList<>();
         
         //Call the stored procedure
         DatabaseConnectionFactory factory = DatabaseConnectionFactory.getInstance();
         Connection conn = factory.getConnection(DatabaseType.MYSQL);
         CallableStatement statement = conn.prepareCall("call sp_retrieve_calls");
+        
+        String phoneNumber;
+        
+        ResultSet results = statement.executeQuery();
+        
+        while(results.next()){
+            IncomingCall call = new IncomingCall();
+            call.setPhoneNumber(results.getString(1));
+            callList.add(call);
+        }
         
         
         return callList;

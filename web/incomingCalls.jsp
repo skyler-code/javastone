@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:useBean id="callList" class="calls.IncomingCallList" scope="session" />
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,7 +17,11 @@
         <header>
             <h1>Incoming calls</h1>
         </header>
-        
+        <section>
+            <c:forEach var="call" items="${callList}">
+                <h3>${call.PhoneNumber}</h3>
+            </c:forEach>
+        </section>
         <footer>
             <p>Copyright &copy; 2017 - Crisis Management System - All rights reserved</p>
         </footer>
