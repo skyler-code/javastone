@@ -94,11 +94,12 @@ VALUES
 
 CREATE TABLE Service_Category (
 	Service_Category_ID INT PRIMARY KEY AUTO_INCREMENT COMMENT 'The service category primary key'
+    , Service_Category_Name VARCHAR(100) COMMENT 'The name of the service category'
     , Description VARCHAR(500) NOT NULL COMMENT 'Description of the service category'
 ) COMMENT 'A service category'
 ;
 
-INSERT INTO Service_Category (Service_Category_ID, Description)
+INSERT INTO Service_Category (Service_Category_Name, Description)
 VALUES
 ("Suicide","If a caller is feeling suicidal"),
 ("Homeless Shelter", "Caller needs a place to stay"),
