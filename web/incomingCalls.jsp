@@ -18,7 +18,6 @@
         <title>Incoming calls</title>
     </head>
     <body>
-        <jsp:include page="includes/navbar.jsp" />
         <header>
             <h1>Incoming calls</h1>
         </header>
