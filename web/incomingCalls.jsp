@@ -10,9 +10,11 @@
 <jsp:useBean id="callList" class="calls.IncomingCallList" scope="session" />
 <!DOCTYPE html>
 <html>
+    <jsp:include page="includes/navbar.jsp"/>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Incoming calls</title>
+        <link rel="stylesheet" href="css/navbar.css">
+        <link rel="stylesheet" href="css/incomingCall.css" type="text/css"
     </head>
     <body>
         <header>
@@ -20,12 +22,12 @@
         </header>
         <section>
             <c:forEach var="call" items="${callList.incomingCallList}">
-                ${call.phoneNumber}
+                <p>Call: ${call.phoneNumber}
                 <a href="<c:url value="RequestHandler">
                     <c:param name="task" value="logCall" />
                     <c:param name="caller_phone" value="${call.phoneNumber}" />
-                   </c:url>">Answer Call</a>
-            </c:forEach>
+                   </c:url>">Answer Call</a><br>
+                </c:forEach></p>
         </section>
         <footer>
             <p>Copyright &copy; 2017 - Crisis Management System - All rights reserved</p>

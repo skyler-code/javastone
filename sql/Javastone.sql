@@ -51,6 +51,7 @@ VALUES
 
 
 
+
 CREATE TABLE App_User (
 	User_ID INT PRIMARY KEY AUTO_INCREMENT COMMENT 'The agent primary key'
     , Username VARCHAR(50) NOT NULL COMMENT 'The username of the agent'
@@ -284,6 +285,48 @@ END$$
 DELIMITER ;
 
 
+DELIMITER $$
+DROP PROCEDURE IF EXISTS sp_update_caller$$
+CREATE PROCEDURE sp_update_caller(
+	IN p_caller_phone VARCHAR(10),
+	IN p_caller_notes VARCHAR(1000),
+	IN p_caller_first VARCHAR(100),
+	IN p_caller_last  VARCHAR(100)
+)
+COMMENT 'Updates existing caller record'
+BEGIN
+	UPDATE Caller
+	SET Caller_Phone = p_caller_phone, Caller_Notes = p_caller_notes, First_Name = p_caller_first, Last_Name = p_caller_last	
+	WHERE Caller_Phone = p_caller_phone;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS sp_create_caller$$
+CREATE PROCEDURE sp_create_caller(
+	IN p_caller_phone VARCHAR(10)
+)
+COMMENT 'Adds a new caller to the database'
+BEGIN
+	INSERT INTO Caller(Caller_Phone)
+	VALUES
+	(p_caller_phone);
+END$$
+DELIMITER ;
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS sp_retrieve_caller_by_phone$$
+CREATE PROCEDURE sp_retrieve_caller_by_phone(
+	IN p_caller_phone VARCHAR(10)
+)
+COMMENT 'Gets a caller record using a phone number'
+BEGIN
+	Select Caller_Phone, Caller_Notes, First_Name, Last_Name
+	FROM Caller
+	WHERE Caller_Phone = p_caller_phone;
+END$$
+DELIMITER ;
+
 
 DROP USER IF EXISTS 'systemuser'@'%';
 CREATE USER 'systemuser'@'%' 
@@ -313,3 +356,13 @@ TO 'systemuser'@'%'
 GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_calls
 TO 'systemuser'@'%'
 ;
+GRANT EXECUTE ON PROCEDURE Javastone.sp_update_caller
+TO 'systemuser'@'%'
+;
+GRANT EXECUTE ON PROCEDURE Javastone.sp_create_caller
+TO 'systemuser'@'%'
+;
+GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_caller_by_phone
+TO 'systemuser'@'%'
+;
+
