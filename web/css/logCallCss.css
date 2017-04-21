@@ -25,3 +25,7 @@ footer{
     border-top: black solid thin;
     padding-bottom: 50px;
 }
+
+.statusMessage{
+    color:red;
+}

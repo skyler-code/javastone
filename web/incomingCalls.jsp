@@ -21,6 +21,10 @@
         <section>
             <c:forEach var="call" items="${callList.incomingCallList}">
                 ${call.phoneNumber}
+                <a href="<c:url value="RequestHandler">
+                    <c:param name="task" value="logCall" />
+                    <c:param name="caller_phone" value="${call.phoneNumber}" />
+                   </c:url>">Answer Call</a>
             </c:forEach>
         </section>
         <footer>

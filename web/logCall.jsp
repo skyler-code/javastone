@@ -15,7 +15,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="callRecord" class="callRecord.CallRecordDTO" scope="session" />
 <jsp:useBean id="authorizedUser" class="agent.Agent" scope="session" />
-<jsp:useBean id="caller" class="caller.caller" scope="session" />
+<jsp:useBean id="caller" class="caller.Caller" scope="session" />
 <jsp:useBean id="callTypeList" class="callRecord.CallTypeList" scope="session" />
 
 
@@ -31,7 +31,7 @@
         <jsp:include page="includes/navbar.jsp"/>
         <header>
             <h1>Log current call</h1>
-            <p style="color: red;">${logCallMessage}</p>
+            <p class="statusMessage">${logCallMessage}</p>
         </header>
         
         <form action="CallRecordHandler" method="POST">

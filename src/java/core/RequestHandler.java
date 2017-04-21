@@ -7,6 +7,7 @@ package core;
 
 import callRecord.CallType;
 import callRecord.CallTypeDAO;
+import caller.Caller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -40,6 +41,9 @@ public class RequestHandler extends HttpServlet {
         switch(nextLocationChoice){
             case "logCall":
                 nextLocation = "/logCall.jsp";
+                String phoneNumber = request.getParameter("caller_phone");
+                Caller caller = new Caller(phoneNumber);
+                request.setAttribute("caller", caller);
                 break;
             case "dataClerkMain":
                 nextLocation = "/dataClerkMain.jsp";

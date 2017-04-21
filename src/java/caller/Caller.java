@@ -9,36 +9,40 @@ package caller;
  *
  * @author Dan Brown
  */
-public class caller {
+public class Caller {
     
     /**
-     * The unique identifier. The number the caller is using to contact us
+     * The unique identifier. The number the Caller is using to contact us
      */
     private String phoneNumber = "";
     
     /**
-     * Any notes in reference to this caller
+     * Any notes in reference to this Caller
      */
     private String callerNotes = "";
     
     /*
-    * The caller's first name
+    * The Caller's first name
     */
     private String firstname = null;
     
     /**
-     * The caller's last name
+     * The Caller's last name
      */
     private String lastname = null;
+    
+    public Caller(String phoneNumber){
+        this.phoneNumber = phoneNumber;
+    }
 
-    public caller() {
+    public Caller() {
         this.phoneNumber = "";
         this.callerNotes = "";
         this.firstname = "";
         this.lastname = "";
     }
     
-    public caller(String phone, String notes, String first, String last) {
+    public Caller(String phone, String notes, String first, String last) {
         this.phoneNumber = phone;
         this.callerNotes = notes;
         this.firstname = first;
