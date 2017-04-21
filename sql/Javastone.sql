@@ -14,9 +14,9 @@ USE Javastone;
 
 CREATE TABLE Caller (
 	Caller_Phone VARCHAR(10) PRIMARY KEY COMMENT 'The caller record primary key / Phone number'
-    , Caller_Notes VARCHAR(1000) NOT NULL COMMENT 'A description of the caller'
-    , First_Name VARCHAR(100) NOT NULL COMMENT 'The first name of the caller'
-    , Last_Name VARCHAR(100) NOT NULL COMMENT 'The last name of the caller'
+    , Caller_Notes VARCHAR(1000) COMMENT 'A description of the caller'
+    , First_Name VARCHAR(100) COMMENT 'The first name of the caller'
+    , Last_Name VARCHAR(100) COMMENT 'The last name of the caller'
 ) COMMENT 'A caller record'
 ;
 

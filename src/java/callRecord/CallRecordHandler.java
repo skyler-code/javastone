@@ -3,6 +3,8 @@
 */
 package callRecord;
 
+import caller.Caller;
+import caller.CallerDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -30,11 +32,18 @@ public class CallRecordHandler extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         HttpSession session = request.getSession();
         
+        //Get the call record details
         int agentId = Integer.parseInt(request.getParameter("agentId"));
         String phoneNumber = request.getParameter("callerPhone");
         String callDescription = request.getParameter("callDescription");
         String callTypeName = request.getParameter("callTypeName");
         LocalDateTime startTime = LocalDateTime.parse(request.getParameter("startTime"));
+        
+        //Get the caller details
+        String callerPhoneNumber = request.getParameter("callerPhone");
+        String callerFirstname = request.getParameter("callerFirstname");
+        String callerLastname = request.getParameter("callerLastname");
+        String callerNotes = request.getParameter("callerNotes");
         
         String nextLocation = "/logCall.jsp";
         String logCallMessage = "";
@@ -50,9 +59,12 @@ public class CallRecordHandler extends HttpServlet {
                 callRecord.setCall_type_name(callTypeName);
                 callRecord.setStart_time(startTime);
             
+            CallerDAO callerDao = new CallerDAO();
+            Caller caller = new Caller(callerPhoneNumber,callerNotes, callerFirstname, callerLastname);
             try{
-                int rowsAffected = CallRecordDAO.SubmitCallRecord(callRecord);
-                if(rowsAffected != 0) {
+                int recordRowsAffected = CallRecordDAO.SubmitCallRecord(callRecord);
+                int callerRowsAffected = callerDao.updateCallerRecord(callerPhoneNumber, callerNotes, callerFirstname, callerLastname);
+                if(recordRowsAffected != 0 && callerRowsAffected != 0) {
                     nextLocation = "/logCall.jsp";
                     logCallMessage = "Call Record Submitted Successfully.";
                 } else {
@@ -60,7 +72,7 @@ public class CallRecordHandler extends HttpServlet {
                     logCallMessage = "There was an error logging the call. Please try again.";
                 }
             } catch(SQLException | ClassNotFoundException ex) {
-                logCallMessage = "The phone number entered does not refer to a valid caller phone in the database.";
+                logCallMessage = ex.getMessage();
             }
         }
         session.setAttribute("logCallMessage", logCallMessage);

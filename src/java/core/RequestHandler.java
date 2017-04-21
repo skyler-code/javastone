@@ -8,6 +8,7 @@ package core;
 import callRecord.CallType;
 import callRecord.CallTypeDAO;
 import caller.Caller;
+import caller.CallerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -42,7 +43,21 @@ public class RequestHandler extends HttpServlet {
             case "logCall":
                 nextLocation = "/logCall.jsp";
                 String phoneNumber = request.getParameter("caller_phone");
-                Caller caller = new Caller(phoneNumber);
+                
+                // See if caller is already in the database. If not add, otherwise populate call log jsp
+                CallerDAO callerDAO = new CallerDAO();
+                Caller caller = null;
+                try{
+                   caller = callerDAO.getCallerByPhone(phoneNumber);
+                   if(caller == null){ //Caller does not exist in database. Create one now
+                       callerDAO.createCallerRecord(phoneNumber);
+                       caller = callerDAO.getCallerByPhone(phoneNumber);
+                   }
+                }catch(Exception ex){
+                    nextLocation = "Oopsies!";
+                    System.out.println(ex.getMessage());
+                }
+                
                 request.setAttribute("caller", caller);
                 break;
             case "dataClerkMain":
