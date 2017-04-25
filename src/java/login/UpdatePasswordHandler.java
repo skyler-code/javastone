@@ -3,31 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package core;
+package login;
 
-import callRecord.CallType;
-import callRecord.CallTypeDAO;
-import caller.Caller;
-import caller.CallerDAO;
+import agent.Agent;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import serviceProviders.ServiceProviderDAO;
-import serviceProviders.ServiceCategory;
-import serviceProviders.ServiceCategoryList;
-import serviceProviders.ServiceProvider;
-import serviceProviders.ServiceProviderList;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Skyler Hiscock
+ * @author Robert Forbes
  */
-public class RequestHandler extends HttpServlet {
-
+public class UpdatePasswordHandler extends HttpServlet{
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,49 +28,40 @@ public class RequestHandler extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        HttpSession session = request.getSession();
+        String oldPassword = request.getParameter("OldPassword");
+        String newPassword = request.getParameter("NewPassword");
+        String confirmPassword = request.getParameter("ConfirmPassword");
         
-        String nextLocation = null;
-        
-        String nextLocationChoice = request.getParameter("task");
-        
-        switch(nextLocationChoice){
-            case "logCall":
-                nextLocation = "/logCall.jsp";
-                String phoneNumber = request.getParameter("caller_phone");
-                
-                // See if caller is already in the database. If not add, otherwise populate call log jsp
-                CallerDAO callerDAO = new CallerDAO();
-                Caller caller = null;
-                try{
-                   caller = callerDAO.getCallerByPhone(phoneNumber);
-                   if(caller == null){ //Caller does not exist in database. Create one now
-                       callerDAO.createCallerRecord(phoneNumber);
-                       caller = callerDAO.getCallerByPhone(phoneNumber);
-                   }
-                }catch(Exception ex){
-                    nextLocation = "Oopsies!";
-                    System.out.println(ex.getMessage());
+        String nextLocation = "/changePassword.jsp";
+        boolean result = false;
+        String message = "";
+        Agent agent = (Agent)session.getAttribute("authorizedUser");
+        if(null == oldPassword || null == newPassword || null == confirmPassword || !newPassword.equals(confirmPassword)){
+            message = "The password entered is not valid";
+        }else if(agent == null){
+            message = "Invalid user";
+        }else {
+            LoginDAO dao = new LoginDAODB();
+            try{
+                result = dao.UpdatePassword(agent.getUserID(), oldPassword, newPassword);
+                if(result = false) {
+                    message = "Your password could not be updated";
+                } else {
+                    message = "Your password was updated successfully";
                 }
-                
-                request.setAttribute("caller", caller);
-                break;
-            case "dataClerkMain":
-                nextLocation = "/dataClerkMain.jsp";
-                break;
-            default:
-                nextLocation = "/index.jsp";
+            } catch(SQLException | ClassNotFoundException ex) {
+                message = ex.getMessage();
+            }
         }
+        session.setAttribute("message", message);
         
-        
-        
-        
-        // Redirect things back to the JSP specified in the switch statement
+        // Redirect things back to the JSP specified in the logic above
         request.getRequestDispatcher(nextLocation).forward(request, response);
-        
     }
-
+    
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -118,5 +100,4 @@ public class RequestHandler extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

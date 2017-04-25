@@ -362,6 +362,7 @@ END$$
 DELIMITER ;
 
 DELIMITER $$
+
 DROP PROCEDURE IF EXISTS sp_remove_incoming_call$$
 CREATE PROCEDURE sp_remove_incoming_call(
 	IN p_phone_number varchar(10)
@@ -372,6 +373,23 @@ BEGIN
     WHERE Phone_Number = p_phone_number;
 END$$
 DELIMITER ;
+
+DROP PROCEDURE IF EXISTS sp_update_user_password$$
+CREATE PROCEDURE sp_update_user_password(
+	IN p_user_id INT,
+	IN p_old_password VARCHAR(256),
+    IN p_new_password VARCHAR(256)
+)
+COMMENT 'Updates existing users password'
+BEGIN
+	UPDATE App_User
+	SET Password_Hash = aes_encrypt(p_new_password, '123FED')	
+	WHERE User_ID = p_user_id
+    AND Password_Hash = aes_encrypt(p_old_password, '123FED');
+END$$
+DELIMITER ;
+
+
 
 DROP USER IF EXISTS 'systemuser'@'%';
 CREATE USER 'systemuser'@'%' 
@@ -419,4 +437,6 @@ TO 'systemuser'@'%'
 GRANT EXECUTE ON PROCEDURE Javastone.sp_remove_incoming_call
 TO 'systemuser'@'%'
 ;
-
+GRANT EXECUTE ON PROCEDURE Javastone.sp_update_user_password
+TO 'systemuser'@'%'
+;
