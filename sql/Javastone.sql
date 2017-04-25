@@ -362,7 +362,6 @@ END$$
 DELIMITER ;
 
 DELIMITER $$
-
 DROP PROCEDURE IF EXISTS sp_remove_incoming_call$$
 CREATE PROCEDURE sp_remove_incoming_call(
 	IN p_phone_number varchar(10)
@@ -374,6 +373,7 @@ BEGIN
 END$$
 DELIMITER ;
 
+DELIMITER $$
 DROP PROCEDURE IF EXISTS sp_update_user_password$$
 CREATE PROCEDURE sp_update_user_password(
 	IN p_user_id INT,
