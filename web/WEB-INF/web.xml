@@ -37,4 +37,10 @@
             30
         </session-timeout>
     </session-config>
+    <jsp-config>
+        <taglib>
+            <taglib-uri>dansPhoneFormatter</taglib-uri>
+            <taglib-location>tlds/phone.tld</taglib-location>
+        </taglib>
+    </jsp-config>
 </web-app>
