@@ -339,6 +339,17 @@ BEGIN
 END$$
 DELIMITER ;
 
+DELIMITER $$
+DROP PROCEDURE IF EXISTS sp_retrieve_service_providers$$
+CREATE PROCEDURE sp_retrieve_service_providers(
+)
+COMMENT 'Retrieves a list of service providers.'
+BEGIN
+	SELECT Service_Provider_ID, Service_Category_Name, Service_Provider_Name, Service_Provider_Phone_Number
+	FROM Service_Provider;
+END$$
+DELIMITER ;
+
 
 DROP USER IF EXISTS 'systemuser'@'%';
 CREATE USER 'systemuser'@'%' 
@@ -375,6 +386,9 @@ GRANT EXECUTE ON PROCEDURE Javastone.sp_create_caller
 TO 'systemuser'@'%'
 ;
 GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_caller_by_phone
+TO 'systemuser'@'%'
+;
+GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_service_providers
 TO 'systemuser'@'%'
 ;
 
