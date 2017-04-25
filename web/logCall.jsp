@@ -8,6 +8,7 @@
 <%@page import="java.time.LocalDateTime"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib  prefix="phf" uri="dansPhoneFormatter" %>
 <%@page import="java.util.ArrayList"%>
 <%@page import="callRecord.CallType"%>
 <%@page import="agent.Agent"%>
@@ -103,10 +104,7 @@
 
                 <input type="submit" value="confirm" >
             </form>
-
-
         </div>
-
         <div class="panel-group" id="accordion" style="display:inline-table">
             <c:forEach var="serviceCategory" items="${serviceCategoriesList.serviceCategories}">
                 <div class="panel panel-default">
@@ -119,7 +117,7 @@
                         <c:forEach var="serviceProvider" items="${serviceProvidersList.serviceProviders}">
                             <c:if test="${serviceProvider.serviceCategoryName == serviceCategory.serviceCategoryName}">
                                 <div class="panel-body">
-                                    ${serviceProvider.serviceProviderName} : ${serviceProvider.serviceProviderPhoneNumber} <br/>
+                                    ${serviceProvider.serviceProviderName} : <phf:formatPhone incomingNumber="${serviceProvider.serviceProviderPhoneNumber}"/> <br/>
                                 </div>
                             </c:if>
                         </c:forEach>
