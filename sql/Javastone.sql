@@ -108,8 +108,7 @@ VALUES
 ;
 
 CREATE TABLE Service_Category (
-	Service_Category_ID INT PRIMARY KEY AUTO_INCREMENT COMMENT 'The service category primary key'
-    , Service_Category_Name VARCHAR(100) COMMENT 'The name of the service category'
+    Service_Category_Name VARCHAR(100) PRIMARY KEY COMMENT 'The name of the service category'
     , Description VARCHAR(500) NOT NULL COMMENT 'Description of the service category'
 ) COMMENT 'A service category'
 ;
@@ -125,11 +124,24 @@ VALUES
 
 CREATE TABLE Service_Provider (
 	Service_Provider_ID INT PRIMARY KEY AUTO_INCREMENT COMMENT 'The service provider primary key'
-    , Service_Category_ID INT NOT NULL COMMENT 'The category for the service provider'
+    , Service_Category_Name VARCHAR(100) NOT NULL COMMENT 'The category for the service provider'
 	, Service_Provider_Name VARCHAR(100) NOT NULL COMMENT 'Service provider name'
 	, Service_Provider_Phone_Number VARCHAR(10) COMMENT 'Service provider phone number'
-    , FOREIGN KEY (Service_Category_ID) REFERENCES Service_Category(Service_Category_ID)
+    , FOREIGN KEY (Service_Category_Name) REFERENCES Service_Category(Service_Category_Name)
 ) COMMENT 'A service provider'
+;
+
+INSERT INTO Service_Provider (Service_Category_Name, Service_Provider_Name, Service_Provider_Phone_Number)
+VALUES
+("Suicide", "Suicide Prevention Lifeline", "8002738255"),
+("Homeless Shelter", "Willis Dady Shelter", "3193627555"),
+("Homeless Shelter", "Cedar House Shelter", "3193642630"),
+("Domestic Abuse", "National Domestic Violence Hotline", "8007997233"),
+("Domestic Abuse", "Waypoint", "3193632093"),
+("Natural Disaster", "Disaster Distress Helpline", "8009855990"),
+("Natural Disaster", "Iowa Red Cross", "5152437681"),
+("Medical Emergency", "911", "911"),
+("Medical Emergency", "Linn County Emergency Medicine", "3193694505")
 ;
 
 CREATE TABLE Call_Record (
