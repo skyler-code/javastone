@@ -350,6 +350,17 @@ BEGIN
 END$$
 DELIMITER ;
 
+DELIMITER $$
+DROP PROCEDURE IF EXISTS sp_retrieve_service_categories$$
+CREATE PROCEDURE sp_retrieve_service_categories(
+)
+COMMENT 'Retrieves a list of service categories.'
+BEGIN
+	SELECT Service_Category_Name, Description
+	FROM Service_Category;
+END$$
+DELIMITER ;
+
 
 DROP USER IF EXISTS 'systemuser'@'%';
 CREATE USER 'systemuser'@'%' 
@@ -391,4 +402,6 @@ TO 'systemuser'@'%'
 GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_service_providers
 TO 'systemuser'@'%'
 ;
-
+GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_service_categories
+TO 'systemuser'@'%'
+;
