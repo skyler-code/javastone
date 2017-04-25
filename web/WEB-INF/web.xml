@@ -17,6 +17,10 @@
         <servlet-class>login.LoginHandler</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>UpdatePasswordHandler</servlet-name>
+        <servlet-class>login.UpdatePasswordHandler</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>CallRecordHandler</servlet-name>
         <servlet-class>callRecord.CallRecordHandler</servlet-class>
     </servlet>
@@ -27,6 +31,10 @@
     <servlet-mapping>
         <servlet-name>LoginHandler</servlet-name>
         <url-pattern>/LoginHandler</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePasswordHandler</servlet-name>
+        <url-pattern>/UpdatePasswordHandler</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CallRecordHandler</servlet-name>
