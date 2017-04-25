@@ -12,24 +12,37 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="css/navbar.css">
+        <link href="css/bootstrapOverrides.css" rel="stylesheet" type="text/css"/>
         <title>Login</title>
     </head>
     <body>
         <jsp:include page="includes/navbar.jsp"/>
-        <a href="<c:url value="RequestHandler" > <c:param name="task" value="logCall" /> </c:url>" >
-                Log call link</a>
 
-            <h1>Login</h1>
-            <p>${message}</p>
-        <form action="LoginHandler" method="POST">
-            <label>Username: </label>
-            <input type="text" name="Username"/>
-            <br>
-            <label>Password </label>
-            <input type="password" name="Password"/>
-            <br>
-            <input type="submit" value="Submit">
-        </form>
+        <div class="container-fluid">
+                <div class="jumbotron">
+                    <h1>Login</h1>
+                    <p>${message}</p>
+                    <form action="LoginHandler" method="POST">
+                        <div>
+                            <div class="form-group">
+                                <label>Username: </label>
+                                <input class="form-control" type="text" name="Username"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Password </label>
+                                <input class="form-control" type="password" name="Password"/>
+                            </div>
+                            <input type="submit" class="btn btn-primary btn-md btn-block" value="Submit">
+                        </div>
+                        
+                        
+                    </form>
+                </div>
+            </div>
+        
+            
     </body>
 </html>
