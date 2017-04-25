@@ -5,6 +5,7 @@ package callRecord;
 
 import caller.Caller;
 import caller.CallerDAO;
+import calls.IncomingCallDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -67,6 +68,9 @@ public class CallRecordHandler extends HttpServlet {
                 if(recordRowsAffected != 0 && callerRowsAffected != 0) {
                     nextLocation = "/logCall.jsp";
                     logCallMessage = "Call Record Submitted Successfully.";
+                    // Now delete the call from the incoming call list 
+                    IncomingCallDAO incomingCallDao = new IncomingCallDAO();
+                    incomingCallDao.removeIncomingCall(phoneNumber);
                 } else {
                     nextLocation = "/logCall.jsp";
                     logCallMessage = "There was an error logging the call. Please try again.";

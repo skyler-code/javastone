@@ -361,6 +361,17 @@ BEGIN
 END$$
 DELIMITER ;
 
+DELIMITER $$
+DROP PROCEDURE IF EXISTS sp_remove_incoming_call$$
+CREATE PROCEDURE sp_remove_incoming_call(
+	IN p_phone_number varchar(10)
+)
+COMMENT 'Removes an entry from the incoming call table'
+BEGIN
+	DELETE FROM incoming_call
+    WHERE Phone_Number = p_phone_number;
+END$$
+DELIMITER ;
 
 DROP USER IF EXISTS 'systemuser'@'%';
 CREATE USER 'systemuser'@'%' 
@@ -405,3 +416,7 @@ TO 'systemuser'@'%'
 GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_service_categories
 TO 'systemuser'@'%'
 ;
+GRANT EXECUTE ON PROCEDURE Javastone.sp_remove_incoming_call
+TO 'systemuser'@'%'
+;
+
