@@ -46,5 +46,22 @@ public class IncomingCallDAO {
         return callList;
     }
     
+    public boolean removeIncomingCall(String phoneNumber) throws SQLException, ClassNotFoundException {
+        
+        boolean result = false;
+        
+        //Call the stored procedure
+        DatabaseConnectionFactory factory = DatabaseConnectionFactory.getInstance();
+        Connection conn = factory.getConnection(DatabaseType.MYSQL);
+        CallableStatement statement = conn.prepareCall("call sp_remove_incoming_call(?)");
+        statement.setString(1, phoneNumber);
+        
+        int rowsAffected = statement.executeUpdate();
+        if(rowsAffected > 0){
+            result = true;
+        }
+        
+        return result;
+    }
     
 }
