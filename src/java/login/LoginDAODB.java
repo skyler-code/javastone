@@ -98,4 +98,34 @@ public class LoginDAODB implements LoginDAO {
         return roles;
     }
 
+    
+    /**
+     * Robert Forbes
+     * 2017/04/25
+     * @param userID
+     * @param oldPassword
+     * @param newPassword
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
+    @Override
+    public boolean UpdatePassword(int userID, String oldPassword, String newPassword) throws SQLException, ClassNotFoundException {
+        int rowsAffected = 0;
+        
+        //Call the stored procedure
+        DatabaseConnectionFactory factory = DatabaseConnectionFactory.getInstance();
+        Connection conn = factory.getConnection(DatabaseType.MYSQL);
+        CallableStatement statement = conn.prepareCall("call sp_update_user_password(?,?,?)");
+    
+        // Set the paraments
+        statement.setInt(1, userID);
+        statement.setString(2, oldPassword);
+        statement.setString(3, newPassword);
+        rowsAffected = statement.executeUpdate();
+        
+        
+        return rowsAffected >= 1;
+    }
+
 }
