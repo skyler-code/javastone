@@ -4,14 +4,14 @@ package serviceProviders;
  *
  * @author Skyler Hiscock
  */
-public class ServiceProviders {
+public class ServiceProvider {
     
     private int ServiceProviderID;
-    private ServiceCategory ServiceCategory;
+    private String ServiceCategory;
     private String ServiceProviderName;
     private String ServiceProviderPhoneNumber;
 
-    public ServiceProviders(int serviceProviderID, ServiceCategory serviceCategory, String serviceProviderName, String serviceProviderPhoneNumber){
+    public ServiceProvider(int serviceProviderID, String serviceCategory, String serviceProviderName, String serviceProviderPhoneNumber){
         this.ServiceProviderID = serviceProviderID;
         this.ServiceCategory = serviceCategory;
         this.ServiceProviderName = serviceProviderName;
@@ -28,7 +28,7 @@ public class ServiceProviders {
     /**
      * @return the ServiceCategoryName
      */
-    public ServiceCategory getServiceCategoryName() {
+    public String getServiceCategoryName() {
         return ServiceCategory;
     }
 
