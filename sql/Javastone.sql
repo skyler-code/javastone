@@ -240,10 +240,10 @@ CREATE PROCEDURE sp_create_call_record(
 )
 COMMENT 'Adds a new call record to the database'
 BEGIN
-	SET @end_time = CURRENT_TIME();
+	SET @end_time = NOW();
 	INSERT INTO Call_Record(User_ID, Call_Description, Call_Type_Name, Caller_Phone, Start_Time, End_Time)
     VALUES
-    (p_user_id, p_call_description, p_call_type_name, p_caller_phone, p_start_time, end_time);
+    (p_user_id, p_call_description, p_call_type_name, p_caller_phone, p_start_time, @end_time);
 	SELECT row_count();
 END$$
 DELIMITER ;
@@ -361,6 +361,23 @@ BEGIN
 END$$
 DELIMITER ;
 
+DELIMITER $$
+DROP PROCEDURE IF EXISTS sp_update_user_password$$
+CREATE PROCEDURE sp_update_user_password(
+	IN p_user_id INT,
+	IN p_old_password VARCHAR(256),
+    IN p_new_password VARCHAR(256)
+)
+COMMENT 'Updates existing users password'
+BEGIN
+	UPDATE App_User
+	SET Password_Hash = aes_encrypt(p_new_password, '123FED')	
+	WHERE User_ID = p_user_id
+    AND Password_Hash = aes_encrypt(p_old_password, '123FED');
+END$$
+DELIMITER ;
+
+
 
 DROP USER IF EXISTS 'systemuser'@'%';
 CREATE USER 'systemuser'@'%' 
@@ -403,5 +420,8 @@ GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_service_providers
 TO 'systemuser'@'%'
 ;
 GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_service_categories
+TO 'systemuser'@'%'
+;
+GRANT EXECUTE ON PROCEDURE Javastone.sp_update_user_password
 TO 'systemuser'@'%'
 ;

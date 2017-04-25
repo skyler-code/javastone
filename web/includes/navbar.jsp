@@ -20,7 +20,9 @@
     <% } %>
     <% if (authorizedUser != null & authorizedUser.getFirstName().length() > 0) { %>
     <li><a href="/JavaStone/index.jsp"><%= authorizedUser.getFirstName() %></a></li>
+    <li><a href="/JavaStone/changePassword.jsp">Change Password</a></li>
     <% } else { %>
     <li><a href="/JavaStone/index.jsp">Login</a></li>
+    
     <% } %>
 </div>

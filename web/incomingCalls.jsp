@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib  prefix="phf" uri="dansPhoneFormatter" %>
 <jsp:useBean id="callList" class="calls.IncomingCallList" scope="session" />
 <!DOCTYPE html>
 <html>
@@ -23,7 +24,7 @@
         </header>
         <section>
             <c:forEach var="call" items="${callList.incomingCallList}">
-                <p>Call: ${call.phoneNumber}
+                <p>Call: <phf:formatPhone incomingNumber="${call.phoneNumber}" />
                 <a href="<c:url value="RequestHandler">
                     <c:param name="task" value="logCall" />
                     <c:param name="caller_phone" value="${call.phoneNumber}" />

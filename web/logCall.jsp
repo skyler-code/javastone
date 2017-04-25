@@ -11,12 +11,18 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="callRecord.CallType"%>
 <%@page import="agent.Agent"%>
+<%@page import="serviceProviders.ServiceCategoryList"%>
+<%@page import="serviceProviders.ServiceProviderList"%>
+<%@page import="serviceProviders.ServiceCategory"%>
+<%@page import="serviceProviders.ServiceProvider"%>
 <%@page import="callRecord.CallRecordDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="callRecord" class="callRecord.CallRecordDTO" scope="session" />
 <jsp:useBean id="authorizedUser" class="agent.Agent" scope="session" />
 <jsp:useBean id="caller" class="caller.Caller" scope="session" />
 <jsp:useBean id="callTypeList" class="callRecord.CallTypeList" scope="session" />
+<jsp:useBean id="serviceProvidersList" class="serviceProviders.ServiceProviderList" scope="session"/>
+<jsp:useBean id="serviceCategoriesList" class="serviceProviders.ServiceCategoryList" scope="session"/>
 
 
 <!DOCTYPE html>
@@ -94,6 +100,14 @@
                 
                 <input type="submit" value="confirm" > 
             </form>
+                        <c:forEach var="serviceCategory" items="${serviceCategoriesList.serviceCategories}">
+                            <b>${serviceCategory.serviceCategoryName}</b> <br/>
+                                    <c:forEach var="serviceProvider" items="${serviceProvidersList.serviceProviders}">
+                                        <c:if test="${serviceProvider.serviceCategoryName == serviceCategory.serviceCategoryName}">
+                                            ${serviceProvider.serviceProviderName} : ${serviceProvider.serviceProviderPhoneNumber} <br/>
+                                        </c:if>
+                                    </c:forEach>
+                        </c:forEach>
         </div>
         <footer>
             <p>Copyright &copy; 2017 - Crisis Management System - All rights reserved</p>

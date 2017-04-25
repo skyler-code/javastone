@@ -17,6 +17,10 @@
         <servlet-class>login.LoginHandler</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>UpdatePasswordHandler</servlet-name>
+        <servlet-class>login.UpdatePasswordHandler</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>CallRecordHandler</servlet-name>
         <servlet-class>callRecord.CallRecordHandler</servlet-class>
     </servlet>
@@ -29,6 +33,10 @@
         <url-pattern>/LoginHandler</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>UpdatePasswordHandler</servlet-name>
+        <url-pattern>/UpdatePasswordHandler</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>CallRecordHandler</servlet-name>
         <url-pattern>/CallRecordHandler</url-pattern>
     </servlet-mapping>
@@ -37,4 +45,10 @@
             30
         </session-timeout>
     </session-config>
+    <jsp-config>
+        <taglib>
+            <taglib-uri>dansPhoneFormatter</taglib-uri>
+            <taglib-location>tlds/phone.tld</taglib-location>
+        </taglib>
+    </jsp-config>
 </web-app>
