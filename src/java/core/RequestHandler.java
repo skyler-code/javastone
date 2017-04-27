@@ -5,6 +5,7 @@
  */
 package core;
 
+import agent.AgentDAODB;
 import callRecord.CallType;
 import callRecord.CallTypeDAO;
 import caller.Caller;
@@ -66,9 +67,7 @@ public class RequestHandler extends HttpServlet {
                 request.setAttribute("caller", caller);
                 break;
             case "dataClerkMain":
-                nextLocation = "/dataClerkMain.jsp";
-                
-                
+                nextLocation = "/dataClerkMain.jsp";                     
                 break;
             default:
                 nextLocation = "/index.jsp";

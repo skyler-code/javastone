@@ -39,8 +39,10 @@
     <body>
         Welcome ${authorizedUser.firstName}! <br/>      
 
-        <form>
+        <form action="ClerkHandler" method="POST">
             <p>To create an account for new employees, fill out fields below and click Add New Account</p>
+            <p>${message}</p>
+            
             <table>
                 <tbody>
                     <tr>
@@ -48,7 +50,15 @@
                             <label for="username">Username:</label>
                         </td>
                         <td>
-                            <input type="text" name="username"/>
+                            <input type="text" name="username" id="username"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="username">Password:</label>
+                        </td>
+                        <td>
+                            <input type="text" name="password" id="password"/>
                         </td>
                     </tr>
                     <tr>
@@ -56,7 +66,7 @@
                             <label for="fName">First Name:</label>
                         </td>
                         <td>
-                            <input type="text" name="fName"/>
+                            <input type="text" name="fName" id="fName"/>
                         </td>
                     </tr>
                     <tr>
@@ -64,7 +74,7 @@
                             <label for="lName">Last Name:</label>
                         </td>
                         <td>
-                            <input type="text" name="lName"/>
+                            <input type="text" name="lName" id="lName"/>
                         </td>
                     </tr>
                     <tr>
@@ -72,7 +82,7 @@
                             <label for="phone">Phone Number:</label>
                         </td>
                         <td>
-                            <input type="text" name="phone" />
+                            <input type="text" name="phone" id="phone"/>
                         </td>
                     </tr>
                     <tr>
@@ -80,7 +90,7 @@
                             <label for="address">Address:</label>
                         </td>
                         <td>
-                            <input type="text" name="address"/>
+                            <input type="text" name="address" id="address"/>
                         </td>
                     </tr>
                     <tr>
@@ -88,7 +98,7 @@
                             <label for="city">City:</label>
                         </td>
                         <td>
-                            <input type="text" name="city"/>
+                            <input type="text" name="city" id="city"  />
                         </td>
                     </tr>
                     <tr>
@@ -96,7 +106,7 @@
                             <label for="state">State:</label>
                         </td>
                         <td>
-                            <input type="text" name="state"/>
+                            <input type="text" name="state" id="state"/>
                         </td>
                     </tr>
                     <tr>
@@ -104,7 +114,7 @@
                             <label for="zip">Zip Code:</label>
                         </td>
                         <td>
-                            <input type="text" name="zip">
+                            <input type="text" name="zip" id="zip" />
                         </td>
                     </tr>
                 </tbody>

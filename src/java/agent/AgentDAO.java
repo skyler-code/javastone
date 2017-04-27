@@ -5,12 +5,14 @@
  */
 package agent;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author Victor Algarin
  */
 public interface AgentDAO {
     
-    public int createNewAccount(String username, String fName, String lName, String phone, String address, String city, String state, String zip );
+    public int createNewAccount(String username, String password, String fName, String lName, String phone, String address, String city, String state, String zip )throws SQLException, ClassNotFoundException;
     
 }

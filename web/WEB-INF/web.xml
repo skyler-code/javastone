@@ -28,6 +28,10 @@
         <servlet-name>CallRecordHandler</servlet-name>
         <servlet-class>callRecord.CallRecordHandler</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ClerkHandler</servlet-name>
+        <servlet-class>clerk.ClerkHandler</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RequestHandler</servlet-name>
         <url-pattern>/RequestHandler</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>CallRecordHandler</servlet-name>
         <url-pattern>/CallRecordHandler</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClerkHandler</servlet-name>
+        <url-pattern>/clerk/ClerkHandler</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
