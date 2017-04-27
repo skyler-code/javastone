@@ -36,7 +36,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Data Clerk Main</title>
     </head>
-    <body>
+    <body class="container">
         Welcome ${authorizedUser.firstName}! <br/>      
 
         <form>

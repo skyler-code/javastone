@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="css/navbar.css">
         <title>JSP Page</title>
     </head>
-    <body>
+    <body class="container">
         <jsp:include page="includes/navbar.jsp" />
         Welcome ${authorizedUser.firstName}! <br/>
         <% if (authorizedUser.getRoles().contains(agent.Role.ADMINISTRATOR)){ %>

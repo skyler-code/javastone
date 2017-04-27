@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="css/incomingCall.css" type="text/css">
         <title>Incoming calls</title>
     </head>
-    <body>
+    <body class="container">
         <header>
             <h1>Incoming calls</h1>
         </header>

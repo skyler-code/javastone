@@ -20,7 +20,7 @@
         <script src="../js/jquery-3.2.1.min.js"></script>
         <script src="../js/active.js"></script>
     </head>
-    <body>
+    <body class="container">
         <jsp:include page="../includes/navbar.jsp"/>
         <h1>Active Calls</h1>
         <table id="calls" class="table">
