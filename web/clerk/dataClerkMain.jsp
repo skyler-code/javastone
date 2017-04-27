@@ -1,7 +1,7 @@
 <%-- 
-    Document   : dataClerkMain
-    Created on : Apr 20, 2017, 1:06:36 PM
-    Author     : NH228U23
+    Created on : Apr 11, 2017
+    Modified on: Apr 25, 2017
+    Author     : Victor Algarin
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -104,7 +104,7 @@
                             <label for="zip">Zip Code:</label>
                         </td>
                         <td>
-                            <input type="number" name="zip">
+                            <input type="text" name="zip">
                         </td>
                     </tr>
                 </tbody>
