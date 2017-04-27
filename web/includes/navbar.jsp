@@ -6,10 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="authorizedUser" class="agent.Agent" scope="session" />
-
 <div id="navbar">
     <ul>
-    <li><a href="/JavaStone/MainScreen.jsp">Main</a></li>
     <% if (authorizedUser.getRoles().contains(agent.Role.DATACLERK)) { %>
     <li><a href="/JavaStone/clerk/active.jsp">Ongoing</a></li>
     <li><a href="/JavaStone/clerk/dataClerkMain.jsp">Data Clerk</a></li>
@@ -21,7 +19,7 @@
     <% if (authorizedUser != null & authorizedUser.getFirstName().length() > 0) { %>
     <li><a href="/JavaStone/index.jsp"><%= authorizedUser.getFirstName() %></a></li>
     <li><a href="/JavaStone/changePassword.jsp">Change Password</a></li>
-    <li><a href="LogoutHandler">Logout</a></li>
+    <li><a href="/JavaStone/LogoutHandler">Logout</a></li>
     <% } else { %>
     <li><a href="/JavaStone/index.jsp">Login</a></li>
     

@@ -33,6 +33,8 @@ public class CallRecordHandler extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         HttpSession session = request.getSession();
         
+        Caller sessionCaller = (Caller) session.getAttribute("caller");
+        
         //Get the call record details
         int agentId = Integer.parseInt(request.getParameter("agentId"));
         String phoneNumber = request.getParameter("callerPhone");
@@ -80,6 +82,7 @@ public class CallRecordHandler extends HttpServlet {
             }
         }
         session.setAttribute("logCallMessage", logCallMessage);
+        session.setAttribute("caller", sessionCaller);
         
         // Redirect things back to the JSP specified in the logic above
         request.getRequestDispatcher(nextLocation).forward(request, response);

@@ -8,17 +8,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib  prefix="phf" uri="dansPhoneFormatter" %>
-<jsp:useBean id="callList" class="calls.IncomingCallList" scope="session" />
+<jsp:useBean id="callList" class="calls.IncomingCallList" scope="page" />
 <!DOCTYPE html>
 <html>
     <jsp:include page="includes/navbar.jsp"/>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/bootstrapOverrides.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="css/navbar.css">
         <link rel="stylesheet" href="css/incomingCall.css" type="text/css">
         <title>Incoming calls</title>
     </head>
-    <body>
+    <body class="container">
         <header>
             <h1>Incoming calls</h1>
         </header>

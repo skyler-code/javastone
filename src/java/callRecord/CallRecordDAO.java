@@ -9,11 +9,12 @@ import database.DatabaseConnectionFactory;
 import database.DatabaseType;
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -43,14 +44,22 @@ public class CallRecordDAO {
     public static ArrayList<CallRecordDTO> getOngoingCalls() {
         ArrayList<CallRecordDTO> calls = new ArrayList<>();
         
-        // todo query database for any call with non-null start and null end
+        Random rng = new Random();
+        
+        // would query database for any call with non-null start and null end
+        // but this would make it really long when we demonstrate
         
         // int callId, int agentId, String callDescription, String callTypeName, LocalDateTime startTime, LocalDateTime endTime
-        calls.add(new CallRecordDTO(100001, 100001, "100001", "Test Call", "Test", LocalDateTime.now(), null));
-        calls.add(new CallRecordDTO(100002, 100001, "100002", "Test Call", "Test", LocalDateTime.now(), null));
-        calls.add(new CallRecordDTO(100003, 100002, "100003", "Test Call", "Test", LocalDateTime.now(), null));
-        calls.add(new CallRecordDTO(100004, 100002, "100004", "Test Call", "Test", LocalDateTime.now(), null));
-        calls.add(new CallRecordDTO(100005, 100004, "100005", "Test Call", "Test", LocalDateTime.now(), null));
+        calls.add(new CallRecordDTO(100001, 100001, "100001", "In Progress", "Test", LocalDateTime.now()
+                .minus(rng.nextInt(8),  ChronoUnit.MINUTES).minus(rng.nextInt(60), ChronoUnit.SECONDS), null));
+        calls.add(new CallRecordDTO(100002, 100001, "100002", "In Progress", "Test", LocalDateTime.now()
+                .minus(rng.nextInt(12), ChronoUnit.MINUTES).minus(rng.nextInt(60), ChronoUnit.SECONDS), null));
+        calls.add(new CallRecordDTO(100003, 100002, "100003", "In Progress", "Test", LocalDateTime.now()
+                .minus(rng.nextInt(16), ChronoUnit.MINUTES).minus(rng.nextInt(60), ChronoUnit.SECONDS), null));
+        calls.add(new CallRecordDTO(100004, 100002, "100004", "In Progress", "Test", LocalDateTime.now()
+                .minus(rng.nextInt(2),  ChronoUnit.MINUTES).minus(rng.nextInt(60), ChronoUnit.SECONDS), null));
+        calls.add(new CallRecordDTO(100005, 100004, "100005", "In Progress", "Test", LocalDateTime.now()
+                .minus(rng.nextInt(4),  ChronoUnit.MINUTES).minus(rng.nextInt(60), ChronoUnit.SECONDS), null));
         
         return calls;
     }
