@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import serviceProviders.ServiceProviderDAO;
 import serviceProviders.ServiceCategory;
 import serviceProviders.ServiceCategoryList;
@@ -40,6 +41,7 @@ public class RequestHandler extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        HttpSession session = request.getSession();
         String nextLocation = null;
         
         String nextLocationChoice = request.getParameter("task");
@@ -58,12 +60,12 @@ public class RequestHandler extends HttpServlet {
                        callerDAO.createCallerRecord(phoneNumber);
                        caller = callerDAO.getCallerByPhone(phoneNumber);
                    }
+                   session.setAttribute("caller", caller);
                 }catch(Exception ex){
                     nextLocation = "Oopsies!";
                     System.out.println(ex.getMessage());
                 }
                 
-                request.setAttribute("caller", caller);
                 break;
             case "dataClerkMain":
                 nextLocation = "/dataClerkMain.jsp";

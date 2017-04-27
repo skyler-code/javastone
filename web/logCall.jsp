@@ -20,7 +20,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="callRecord" class="callRecord.CallRecordDTO" scope="session" />
 <jsp:useBean id="authorizedUser" class="agent.Agent" scope="session" />
-<jsp:useBean id="caller" class="caller.Caller" scope="session" />
 <jsp:useBean id="callTypeList" class="callRecord.CallTypeList" scope="session" />
 <jsp:useBean id="serviceProvidersList" class="serviceProviders.ServiceProviderList" scope="session"/>
 <jsp:useBean id="serviceCategoriesList" class="serviceProviders.ServiceCategoryList" scope="session"/>
@@ -46,12 +45,6 @@
         <div class="mainContent">
             <form action="CallRecordHandler" method="POST">
                 <div class="left">
-                    <%-- 
-                    <section>
-                    <label for="callId" id="lblCallId">Call ID</label>
-                    <input name="callId" id="callId" type="text" readonly="readonly" value="<c:out value="${callRecord.call_Id}" default="000000" />"><br>
-                    </section>
-                    --%>
                     <section>
                         <label for="agentId" id="lblAgentId">Agent ID</label>
                         <input name="agentId" id="agentId" type="text" readonly="readonly" value="<c:out value="${authorizedUser.userID}" default="000000" />"><br>
