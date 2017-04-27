@@ -36,7 +36,7 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <title>LogCall</title>
     </head>
-    <body>
+    <body class="container">
         <jsp:include page="includes/navbar.jsp"/>
         <header>
             <h1>Log current call</h1>

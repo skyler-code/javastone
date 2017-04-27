@@ -17,7 +17,7 @@
         <link href="css/bootstrapOverrides.css" rel="stylesheet" type="text/css"/>
         <title>Login</title>
     </head>
-    <body>
+    <body class="container">
         <jsp:include page="includes/navbar.jsp"/>
 
         <div class="container-fluid">
