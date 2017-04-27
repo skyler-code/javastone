@@ -8,7 +8,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib  prefix="phf" uri="dansPhoneFormatter" %>
-<jsp:useBean id="callList" class="calls.IncomingCallList" scope="session" />
+<jsp:useBean id="callList" class="calls.IncomingCallList" scope="page" />
 <!DOCTYPE html>
 <html>
     <jsp:include page="includes/navbar.jsp"/>
