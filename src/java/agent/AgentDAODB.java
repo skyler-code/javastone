@@ -40,10 +40,10 @@ public class AgentDAODB implements AgentDAO {
         statement.setString(9, zip);
         
         resultSet = statement.executeQuery();       
-        int count =0;
+        int count = 0;
         
         if (resultSet.next()) {
-            count = resultSet.getInt("count");
+            count = resultSet.getInt("affected");
         }
         
         return count;

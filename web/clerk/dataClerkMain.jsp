@@ -39,7 +39,6 @@
         <title>Data Clerk Main</title>
     </head>
     <body class="container">
-        Welcome ${authorizedUser.firstName}! <br/>      
 
         <form action="ClerkHandler" method="POST">
             <p>To create an account for new employees, fill out fields below and click Add New Account</p>
