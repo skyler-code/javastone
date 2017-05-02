@@ -35,6 +35,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="../js/jquery-3.2.1.min.js" type="text/javascript"></script>
         <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="../css/logCallCss.css" type="text/css">
         <link rel="stylesheet" href="../css/navbar.css">
         <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <title>Data Clerk Main</title>
@@ -44,7 +45,7 @@
 
         <form action="ClerkHandler" method="POST">
             <p><br />To create an account for new employees, fill out fields below and click Add New Account</p>
-            <p>${message}</p>
+            <p class="statusMessage">${message}</p>
 
             <table>
                 <tbody>
@@ -58,13 +59,20 @@
                     </tr>
                     <tr>
                         <td>
-                            <label for="username">Password:</label>
+                            <label for="password">Password:</label>
                         </td>
                         <td>
                             <input type="password" name="password" id="password"/>
                         </td>
                     </tr>
                     <tr>
+                        <td>
+                            <label for="passwordConfirm">Confirm Password:</label>
+                        </td>
+                        <td>
+                            <input type="password" name="passwordConfirm" id="passwordConfirm"/>
+                        </td>
+                    </tr>
                         <td>
                             <label for="fName">First Name:</label>
                         </td>
@@ -125,6 +133,5 @@
             <label for="newAccount">Add New Account</label>
             <input type="submit" name="newAccount"/>
         </form>
-
     </body>
 </html>
