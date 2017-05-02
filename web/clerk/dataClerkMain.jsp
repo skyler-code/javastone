@@ -11,7 +11,7 @@
 
 <%
     Agent dataClerk = (Agent) request.getAttribute("Agent");
-    
+
     String username = "";
     String fName = "";
     String lName = "";
@@ -19,7 +19,7 @@
     String address = "";
     String city = "";
     String zip = "";
-    
+
     if (null != dataClerk) {
         username = dataClerk.getUsername();
         fName = dataClerk.getFirstName();
@@ -29,21 +29,23 @@
         city = dataClerk.getCity();
         zip = dataClerk.getZipCode();
     }
-
 %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/bootstrapOverrides.css" rel="stylesheet" type="text/css"/>
+        <script src="../js/jquery-3.2.1.min.js" type="text/javascript"></script>
+        <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="../css/navbar.css">
+        <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <title>Data Clerk Main</title>
     </head>
     <body class="container">
+        <jsp:include page="../includes/navbar.jsp"/>
 
         <form action="ClerkHandler" method="POST">
-            <p>To create an account for new employees, fill out fields below and click Add New Account</p>
+            <p><br />To create an account for new employees, fill out fields below and click Add New Account</p>
             <p>${message}</p>
-            
+
             <table>
                 <tbody>
                     <tr>
@@ -59,7 +61,7 @@
                             <label for="username">Password:</label>
                         </td>
                         <td>
-                            <input type="text" name="password" id="password"/>
+                            <input type="password" name="password" id="password"/>
                         </td>
                     </tr>
                     <tr>
