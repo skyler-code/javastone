@@ -38,6 +38,7 @@
     </head>
     <body class="container">
         <jsp:include page="includes/navbar.jsp"/>
+        <div class="container">
         <header>
             <h1>Log current call</h1>
             <p class="statusMessage">${logCallMessage}</p>
@@ -90,7 +91,7 @@
                         <input name="callerLastname" id="callerLastname" type="text" value="${caller.lastname}"><br>
                     </section>
                     <section>
-                        <label for="callerNotes" id="lblCallerNotes">Callers notes</label>
+                        <label for="callerNotes" id="lblCallerNotes">Callers notes</label><br/>
                         <textarea name="callerNotes" id="callerNotes" rows="5" cols="30">${caller.callerNotes}</textarea>
                     </section>
                 </div>
@@ -98,12 +99,12 @@
                 <input type="submit" value="confirm" >
             </form>
         </div>
-        <div class="panel-group" id="accordion" style="display:inline-table">
+        <div class="panel-group" id="services-accordion" style="display:inline-table">
             <c:forEach var="serviceCategory" items="${serviceCategoriesList.serviceCategories}">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#${serviceCategory.serviceCategoryName.replaceAll("\\s+","")}">${serviceCategory.serviceCategoryName}</a>
+                            <a data-toggle="collapse" data-parent="#services-accordion" href="#${serviceCategory.serviceCategoryName.replaceAll("\\s+","")}">${serviceCategory.serviceCategoryName}</a>
                         </h4>
                     </div>
                     <div id="${serviceCategory.serviceCategoryName.replaceAll("\\s+","")}" class="panel-collapse collapse">
@@ -118,6 +119,7 @@
                 </div>
             </c:forEach>
         </div>
+                    </div>
         <footer>
             <p>Copyright &copy; 2017 - Crisis Management System - All rights reserved</p>
         </footer>
