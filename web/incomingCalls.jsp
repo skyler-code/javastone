@@ -11,7 +11,6 @@
 <jsp:useBean id="callList" class="calls.IncomingCallList" scope="page" />
 <!DOCTYPE html>
 <html>
-    <jsp:include page="includes/navbar.jsp"/>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -20,8 +19,10 @@
         <link rel="stylesheet" href="css/incomingCall.css" type="text/css">
         <title>Incoming calls</title>
     </head>
-    <body class="container">
-        <header>
+    <body>
+        <jsp:include page="includes/navbar.jsp" />
+        <div class="container">
+            <header>
             <h1>Incoming calls</h1>
         </header>
         <section>
@@ -40,5 +41,7 @@
         <footer>
             <p>Copyright &copy; 2017 - Crisis Management System - All rights reserved</p>
         </footer>
+        </div>
+        
     </body>
 </html>

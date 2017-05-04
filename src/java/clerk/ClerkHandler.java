@@ -40,6 +40,7 @@ public class ClerkHandler extends HttpServlet {
         HttpSession session= request.getSession();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String passwordConfirm = request.getParameter("passwordConfirm");
         String fName = request.getParameter("fName");
         String lName = request.getParameter("lName");
         String phone = request.getParameter("phone");
@@ -51,7 +52,9 @@ public class ClerkHandler extends HttpServlet {
         
         if (username.equals("") || password.equals("") || fName.equals("") || lName.equals("")|| phone.equals("") || address.equals("") || city.equals("") || state.equals("") ||zip.equals("")) {
             message = "Please ensure all fields are entered";
-        } else{
+        } else if(!password.equals(passwordConfirm)){
+            message = "Passwords do not match";
+        }else{
             AgentDAODB agent = new AgentDAODB();
             try{
                 agent.createNewAccount(username, password, fName, lName, phone, address, city, state, zip);

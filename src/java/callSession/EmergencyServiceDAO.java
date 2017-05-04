@@ -7,6 +7,6 @@ import java.util.ArrayList;
  *
  * @author Michael Takrama
  */
-public interface EmployeeServiceDAO {
+public interface EmergencyServiceDAO {
     ArrayList<EmergencyService> getEmergencyServices();
 }

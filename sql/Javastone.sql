@@ -251,7 +251,6 @@ DELIMITER ;
 DELIMITER $$
 DROP PROCEDURE IF EXISTS sp_create_new_user$$
 CREATE PROCEDURE sp_create_new_user(
-	IN p_user_id INT,
     IN p_username VARCHAR(50),
     IN p_password_hash VARCHAR(500),
     IN p_first_name VARCHAR(50),
@@ -264,10 +263,10 @@ CREATE PROCEDURE sp_create_new_user(
 )
 COMMENT 'Adds a new user to the database'
 BEGIN
-	INSERT INTO App_User(User_ID, USERNAME, Password_Hash, First_Name, Last_Name, Phone_Number, Address, City, State, Zip)
+	INSERT INTO App_User(USERNAME, Password_Hash, First_Name, Last_Name, Phone_Number, Address, City, State, Zip_Code)
     VALUES
-    (p-user_id, p_username, p_password_hash, p_first_name, p_last_name, p_phone_number, p_address, p_city, p_state, p_zip_code);
-    SELECt row_count();
+    (p_username, p_password_hash, p_first_name, p_last_name, p_phone_number, p_address, p_city, p_state, p_zip_code);
+    SELECT row_count() as affected;
 END $$
 DELIMITER ;
 
@@ -453,5 +452,8 @@ GRANT EXECUTE ON PROCEDURE Javastone.sp_update_user_password
 TO 'systemuser'@'%'
 ;
 GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_caller_history
+TO 'systemuser'@'%'
+;
+GRANT EXECUTE ON PROCEDURE Javastone.sp_create_new_user
 TO 'systemuser'@'%'
 ;

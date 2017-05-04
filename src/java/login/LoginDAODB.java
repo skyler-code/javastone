@@ -48,7 +48,7 @@ public class LoginDAODB implements LoginDAO {
         String zipCode;
         if (resultSet.next()) {
             userId = resultSet.getInt("user_id");
-            Username = resultSet.getString("last_name");
+            Username = resultSet.getString("username");
             firstName = resultSet.getString("first_name");
             lastName = resultSet.getString("last_name");
             phoneNumber = resultSet.getString("phone_number");

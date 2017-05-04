@@ -41,6 +41,24 @@ footer{
 
 .mainContent{
     padding-bottom: 5em;
+    width: 75%;
+    max-width: 75%;
+    float: right;
+}
+
+#services-accordion{
+    width: 24%;
+    max-width: 24%;
+    float: left;
+}
+
+#callerNotes{
+    max-width: 400px;
+}
+
+div.container{
+    max-width: 940px;
+    padding: 0px;
 }
 
 form{

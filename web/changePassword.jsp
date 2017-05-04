@@ -14,9 +14,10 @@
         <link href="css/bootstrapOverrides.css" rel="stylesheet" type="text/css"/>
         <title>Update Password</title>
     </head>
-    <body class="container">
+    <body>
         <jsp:include page="includes/navbar.jsp" />
-        <div class="container-fluid">
+        <div class="container">
+            <div class="container-fluid">
             <div class="jumbotron">
                 <h1>Change Password</h1>
                 <p>${message}</p>
@@ -41,8 +42,6 @@
                 </form>
             </div>
         </div>
-        
-        
-        
+        </div>
     </body>
 </html>
