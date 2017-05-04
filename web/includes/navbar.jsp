@@ -17,6 +17,7 @@
     <!--li><a href="/JavaStone/logCall.jsp">Log</a></li-->
     <% } %>
     <% if (authorizedUser != null & authorizedUser.getFirstName().length() > 0) { %>
+    <li><a href="/JavaStone/MainScreen.jsp">${authorizedUser.firstName}</a></li>
     <li><a href="/JavaStone/changePassword.jsp">Change Password</a></li>
     <li><a href="/JavaStone/LogoutHandler">Logout</a></li>
     <% } else { %>

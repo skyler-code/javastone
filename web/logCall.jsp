@@ -36,9 +36,10 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <title>LogCall</title>
     </head>
-    <body class="container">
-        <jsp:include page="includes/navbar.jsp"/>
+    <body>
+        <jsp:include page="includes/navbar.jsp" />
         <div class="container">
+            <div class="container">
         <header>
             <h1>Log current call</h1>
             <p class="statusMessage">${logCallMessage}</p>
@@ -123,5 +124,7 @@
         <footer>
             <p>Copyright &copy; 2017 - Crisis Management System - All rights reserved</p>
         </footer>
+        </div>
+        
     </body>
 </html>

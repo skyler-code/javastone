@@ -18,8 +18,8 @@
     </head>
     <body>
         <jsp:include page="includes/navbar.jsp" />
-
-        <form method="POST" action="">
+        <div class="container">
+            <form method="POST" action="">
             <c:forEach items="${emergencyService.emergencyServices}" var="ems"> 
                 <div class="radio">
                     <label><input type="radio" name="opems1" value="${ems.id}">${ems.name} || Description: ${ems.description} || Specialty: ${ems.specialty}</label>
@@ -38,6 +38,6 @@
 
             <input type="submit" class="btn btn-primary" value="Route Call"/> 
         </form>
-
+        </div>
     </body>
 </html>
