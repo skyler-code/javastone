@@ -27,6 +27,7 @@
                 <tr>
                     <th>Start Time</th>
                     <th>End Time</th>
+                    <th>Call Type</th>
                     <th>Description</th>
                 </tr>
             </thead>
@@ -35,6 +36,7 @@
                     <tr>
                         <td>${x.startTime}</td>
                         <td>${x.endTime}</td>
+                        <td>${x.callTypeName}</td>
                         <td id="callDescription">${x.callDescription}</td>
                     </tr>
                 </c:forEach>

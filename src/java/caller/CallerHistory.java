@@ -27,15 +27,18 @@ public class CallerHistory {
      * Date and time the call was ended
      */
     private LocalDateTime endTime = null;
+    
+    private String callTypeName = "";
 
     public CallerHistory() {
     
     }
     
-    public CallerHistory(String description, LocalDateTime startTime, LocalDateTime endTime) {
+    public CallerHistory(String description, LocalDateTime startTime, LocalDateTime endTime, String callTypeName) {
         this.callDescription = description;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.callTypeName = callTypeName;
     }
     
     public String getCallDescription() {
@@ -61,8 +64,14 @@ public class CallerHistory {
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
-    
-    
+
+    public String getCallTypeName() {
+        return callTypeName;
+    }
+
+    public void setCallTypeName(String callTypeName) {
+        this.callTypeName = callTypeName;
+    }
     
     
     

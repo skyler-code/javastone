@@ -20,6 +20,10 @@ CREATE TABLE Caller (
 ) COMMENT 'A caller record'
 ;
 
+INSERT INTO Caller(Caller_Phone, Caller_Notes, First_Name, Last_Name)
+VALUES('3192203056', 'Typically calls after a rager or whilst coming down from a pinger trip.','James','Edinburgh')
+;
+
 CREATE TABLE Call_Type (
 	Call_Type_Name VARCHAR(50) PRIMARY KEY COMMENT 'The call type primary key'
     , Description VARCHAR(1000) NOT NULL COMMENT 'A description of the call type'
@@ -158,7 +162,11 @@ CREATE TABLE Call_Record (
 ) COMMENT 'A record for a single call'
 ;
 
-
+INSERT INTO Call_Record(User_ID, Call_Description, Call_type_Name, Caller_Phone,Start_Time,End_Time)
+VALUES
+(1,"Caller was very angry and verbally aggressive after drinking a shot of wine, he then passed out mid call.",'Alcohol Abuse','3192203056','2017-05-04 09:15:04','2017-05-04 9:20:10'),
+(1,"Caller was distressed after hitting his wife in the throat. The police were called and he cooperated",'Domestic Violence','3192203056','2017-05-04 9:25:04','2017-05-04 10:00:10')
+;
 
 -- Stored Procedures
 
@@ -395,7 +403,7 @@ CREATE PROCEDURE sp_retrieve_caller_history(
 )
 COMMENT 'Retrieve history of callers for a caller'
 BEGIN
-	SELECT Start_Time, End_Time, Call_Description
+	SELECT Start_Time, End_Time, Call_Description, Call_Type_Name
     FROM call_record
     WHERE Caller_Phone = p_phone_number;
 END$$

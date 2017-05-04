@@ -87,11 +87,12 @@ public class CallerDAO {
         statement.setString(1, callerPhone);
         
         ResultSet resultSet = statement.executeQuery();
-        if(resultSet.next()){
+        while(resultSet.next()){
             CallerHistory c = new CallerHistory();
             c.setStartTime(resultSet.getTimestamp(1).toLocalDateTime());
             c.setEndTime(resultSet.getTimestamp(2).toLocalDateTime());
             c.setCallDescription(resultSet.getString(3));
+            c.setCallTypeName(resultSet.getString(4));
             
             historyList.add(c);
         }
