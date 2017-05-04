@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:useBean id="emergencyService" class="callSession.EmergencyService" scope="session" />
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,26 +15,25 @@
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
         <link href="css/navbar.css" rel="stylesheet" type="text/css"/>
-        <jsp:useBean id="emergencyService" class="callSession.EmergencyService" scope="session" />
     </head>
     <body>
         <jsp:include page="includes/navbar.jsp" />
 
-        <form method="post" action="">
-            <c:forEach items="${emergencyService.emergencyServices}}" var="ems" varStatus="line" > 
+        <form method="POST" action="">
+            <c:forEach items="${emergencyService.emergencyServices}" var="ems"> 
                 <div class="radio">
-                    <label><input type="radio" name="opems1" value=${ems.Id}>${ems.Name}</label>
+                    <label><input type="radio" name="opems1" value="${ems.id}">${ems.name} || Description: ${ems.description} || Specialty: ${ems.specialty}</label>
                 </div>
             </c:forEach>
 
             <!--Emergency Services-->
-            <div class="radio">
+<!--            <div class="radio">
                 <label><input type="radio" name="opems1" value="1">Already Dead Emergency Services</label>
             </div>
 
             <div class="radio">
                 <label><input type="radio" name="opems1" value="2">Probably Going To Die Emergency Services</label>
-            </div>
+            </div>-->
             <!--End of Emergency Services-->     
 
             <input type="submit" class="btn btn-primary" value="Route Call"/> 

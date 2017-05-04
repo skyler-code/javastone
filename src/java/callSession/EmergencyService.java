@@ -127,7 +127,7 @@ public class EmergencyService {
     public ArrayList<EmergencyService> getEmergencyServices() {
         if ( null == emergencyServices)
         {
-            EmployeeServiceDAO dao = new EmployeeServiceDAOStub();
+            EmergencyServiceDAO dao = new EmergencyServiceDAOStub();
             this.emergencyServices = dao.getEmergencyServices();
         }
         return emergencyServices;

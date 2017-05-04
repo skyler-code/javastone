@@ -8,6 +8,7 @@ package core;
 import agent.AgentDAODB;
 import callRecord.CallType;
 import callRecord.CallTypeDAO;
+import callSession.EmergencyService;
 import caller.Caller;
 import caller.CallerDAO;
 import java.io.IOException;
@@ -70,6 +71,12 @@ public class RequestHandler extends HttpServlet {
                 break;
             case "dataClerkMain":
                 nextLocation = "/dataClerkMain.jsp";                     
+                break;
+            case "emergencyService":
+                EmergencyService emergencyService = new EmergencyService();
+                session.removeAttribute("emergencyService");
+                session.setAttribute("emergencyService", emergencyService);
+                nextLocation = "/emergencyservices.jsp";
                 break;
             default:
                 nextLocation = "/index.jsp";
