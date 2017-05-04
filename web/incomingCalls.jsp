@@ -30,7 +30,11 @@
                 <a href="<c:url value="RequestHandler">
                     <c:param name="task" value="logCall" />
                     <c:param name="caller_phone" value="${call.phoneNumber}" />
-                   </c:url>">Answer Call</a><br>
+                   </c:url>">Answer Call</a>
+                <a href="<c:url value="RequestHandler">
+                    <c:param name="task" value="viewCallerHistory" />
+                    <c:param name="caller_phone" value="${call.phoneNumber}" />
+                   </c:url>">History</a><br>
                 </c:forEach></p>
         </section>
         <footer>

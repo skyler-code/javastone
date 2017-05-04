@@ -1,0 +1,42 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 4, 2017, 12:50:01 PM
+    Author     : nh228u24
+*/
+
+#callDescription{
+    column-width: 65em;
+}
+
+table{
+    margin-top: 3em;
+    margin-left: 1em;
+}
+
+td{
+    padding: 0.5em 1em 0.5em 1em;
+    
+}
+
+th{
+    text-align: center;
+}
+
+
+footer{
+    
+    text-align: center;
+    margin-top: 180px;
+    border-top: black solid thin;
+    padding-bottom: 50px;
+}
+
+header{
+    margin-bottom: 30px; 
+    padding-bottom: 60px;
+    background-color: beige;
+}

@@ -10,8 +10,11 @@ import callRecord.CallType;
 import callRecord.CallTypeDAO;
 import caller.Caller;
 import caller.CallerDAO;
+import caller.CallerHistory;
+import caller.HistoryBean;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -41,46 +44,60 @@ public class RequestHandler extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         HttpSession session = request.getSession();
         String nextLocation = null;
-        
+
         String nextLocationChoice = request.getParameter("task");
-        
-        switch(nextLocationChoice){
+
+        switch (nextLocationChoice) {
             case "logCall":
                 nextLocation = "/logCall.jsp";
                 String phoneNumber = request.getParameter("caller_phone");
-                
+
                 // See if caller is already in the database. If not add, otherwise populate call log jsp
-                CallerDAO callerDAO = new CallerDAO();
                 Caller caller = null;
-                try{
-                   caller = callerDAO.getCallerByPhone(phoneNumber);
-                   if(caller == null){ //Caller does not exist in database. Create one now
-                       callerDAO.createCallerRecord(phoneNumber);
-                       caller = callerDAO.getCallerByPhone(phoneNumber);
-                   }
-                   session.setAttribute("caller", caller);
-                }catch(Exception ex){
+                try {
+                    CallerDAO callerDAO = new CallerDAO();
+                    caller = callerDAO.getCallerByPhone(phoneNumber);
+                    if (caller == null) { //Caller does not exist in database. Create one now
+                        callerDAO.createCallerRecord(phoneNumber);
+                        caller = callerDAO.getCallerByPhone(phoneNumber);
+                    }
+                    session.setAttribute("caller", caller);
+                } catch (Exception ex) {
                     nextLocation = "Oopsies!";
                     System.out.println(ex.getMessage());
                 }
-                
+
                 break;
             case "dataClerkMain":
-                nextLocation = "/dataClerkMain.jsp";                     
+                nextLocation = "/dataClerkMain.jsp";
                 break;
+            case "viewCallerHistory":
+                try {
+
+                    nextLocation = "/callerHistory.jsp";
+                    String callerNumber = request.getParameter("caller_phone");
+
+                    HistoryBean historyBean = new HistoryBean();
+                    historyBean.setCallerNumber(callerNumber);
+
+                    session.setAttribute("history", historyBean);
+
+                } catch (Exception ex) {
+
+                }
+
+                break;
+
             default:
                 nextLocation = "/index.jsp";
         }
-        
-        
-        
-        
+
         // Redirect things back to the JSP specified in the switch statement
         request.getRequestDispatcher(nextLocation).forward(request, response);
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

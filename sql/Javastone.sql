@@ -389,6 +389,18 @@ BEGIN
 END$$
 DELIMITER ;
 
+DELIMITER $$
+DROP PROCEDURE IF EXISTS sp_retrieve_caller_history$$
+CREATE PROCEDURE sp_retrieve_caller_history(
+	IN p_phone_number varchar(10)
+)
+COMMENT 'Retrieve history of callers for a caller'
+BEGIN
+	SELECT Start_Time, End_Time, Call_Description
+    FROM call_record
+    WHERE Caller_Phone = p_phone_number;
+END$$
+DELIMITER ;
 
 
 DROP USER IF EXISTS 'systemuser'@'%';
@@ -438,5 +450,8 @@ GRANT EXECUTE ON PROCEDURE Javastone.sp_remove_incoming_call
 TO 'systemuser'@'%'
 ;
 GRANT EXECUTE ON PROCEDURE Javastone.sp_update_user_password
+TO 'systemuser'@'%'
+;
+GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_caller_history
 TO 'systemuser'@'%'
 ;
