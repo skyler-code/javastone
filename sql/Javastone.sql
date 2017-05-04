@@ -168,6 +168,24 @@ VALUES
 (1,"Caller was distressed after hitting his wife in the throat. The police were called and he cooperated",'Domestic Violence','3192203056','2017-05-04 9:25:04','2017-05-04 10:00:10')
 ;
 
+
+CREATE TABLE EmergencySeviceLog (
+	Service_Provider_ID INT NOT NULL COMMENT 'Service Provider ID'
+    , User_ID INT NOT NULL COMMENT 'Agent that activated Emergency Service'
+    , Transfer_Time DATETIME NOT NULL COMMENT 'Time Call was transferred'
+    , PRIMARY KEY ( service_provider_id, user_id )
+    , FOREIGN KEY (service_provider_id) REFERENCES Service_Provider ( Service_Provider_ID)
+    , FOREIGN KEY ( user_id ) REFERENCES App_User ( User_ID )
+) COMMENT 'A caller record'
+;
+
+INSERT INTO EmergencySeviceLog ( Service_Provider_ID, User_ID, Transfer_Time )
+VALUES
+(1,3,'2012-05-05'),
+(2,3,'2015-06-01'),
+(3,3,'2017-06-20')
+;
+
 -- Stored Procedures
 
 DELIMITER $$
