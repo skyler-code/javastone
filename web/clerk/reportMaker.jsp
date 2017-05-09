@@ -22,7 +22,6 @@
     <body class="container">
         <h1>Report Maker</h1>
         <form action="ReportHandler" method="GET" class="form-inline">
-            <!---<input type='hidden' name='task' action='doReport'/>-->
             <div class="form-group">
                 <label for="reportType" id="lblReportType">Select Report Type: </label><br>
                 <select name='reportType'>

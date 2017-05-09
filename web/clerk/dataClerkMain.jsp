@@ -42,7 +42,6 @@
         <title>Data Clerk Main</title>
     </head>
     <body>
-        
         <jsp:include page="../includes/navbar.jsp"/>
         <div class="container">
             <form action="ClerkHandler" method="POST">
@@ -135,11 +134,10 @@
             <label for="newAccount">Add New Account</label>
             <input type="submit" name="newAccount"/>
         </form>
-<<<<<<< HEAD
+        <div class="btn-link">
         <a href='<c:url value="../RequestHandler" > <c:param name="task" value="report" /> </c:url>' >
-        Generate Reports</a>
-=======
+        Create Reports</a>
         </div>
->>>>>>> origin/master
+        </div>
     </body>
 </html>
