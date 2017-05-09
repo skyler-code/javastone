@@ -170,20 +170,21 @@ VALUES
 
 
 CREATE TABLE EmergencySeviceLog (
-	Service_Provider_ID INT NOT NULL COMMENT 'Service Provider ID'
+	id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'Unique ID'
+	, Service_Provider_ID INT NOT NULL COMMENT 'Service Provider ID'
     , User_ID INT NOT NULL COMMENT 'Agent that activated Emergency Service'
     , Transfer_Time DATETIME NOT NULL COMMENT 'Time Call was transferred'
-    , PRIMARY KEY ( service_provider_id, user_id )
+	, Note VARCHAR(512) COMMENT 'Note for transfer'
     , FOREIGN KEY (service_provider_id) REFERENCES Service_Provider ( Service_Provider_ID)
     , FOREIGN KEY ( user_id ) REFERENCES App_User ( User_ID )
 ) COMMENT 'A caller record'
 ;
 
-INSERT INTO EmergencySeviceLog ( Service_Provider_ID, User_ID, Transfer_Time )
+INSERT INTO EmergencySeviceLog ( Service_Provider_ID, User_ID, Transfer_Time, Note )
 VALUES
-(1,3,'2012-05-05'),
-(2,3,'2015-06-01'),
-(3,3,'2017-06-20')
+(1,3,'2012-05-05', 'He is about to die'),
+(2,3,'2015-06-01', 'He is having a seizure'),
+(3,3,'2017-06-20', 'He is so sick')
 ;
 
 -- Stored Procedures
@@ -427,6 +428,34 @@ BEGIN
 END$$
 DELIMITER ;
 
+DELIMITER $$
+DROP PROCEDURE IF EXISTS sp_create_new_emergencylog$$
+CREATE PROCEDURE sp_create_new_emergencylog(
+    IN p_service_provider_id VARCHAR(50),
+    IN p_user_id VARCHAR(500),
+    IN p_transfer_time VARCHAR(50),
+    IN p_note VARCHAR(100)
+)
+COMMENT 'Adds a new emergency route entry to emergency log'
+BEGIN
+	INSERT INTO EmergencySeviceLog(Service_Provider_ID, User_ID, Transfer_Time, Note)
+    VALUES
+    (p_service_provider_id, p_user_id, p_transfer_time, p_note);
+    SELECT row_count();
+END $$
+DELIMITER ;
+
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS sp_retrieve_emergencylog$$
+CREATE PROCEDURE sp_retrieve_emergencylog()
+COMMENT 'Retrieves Emergency Routing Log.'
+BEGIN
+	SELECT Service_Provider_ID, User_ID, Transfer_Time, Note
+	FROM EmergencySeviceLog;
+END $$
+DELIMITER ;
+
 
 DROP USER IF EXISTS 'systemuser'@'%';
 CREATE USER 'systemuser'@'%' 
@@ -481,5 +510,11 @@ GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_caller_history
 TO 'systemuser'@'%'
 ;
 GRANT EXECUTE ON PROCEDURE Javastone.sp_create_new_user
+TO 'systemuser'@'%'
+;
+GRANT EXECUTE ON PROCEDURE Javastone.sp_create_new_emergencylog 
+TO 'systemuser'@'%'
+;
+GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_emergencylog 
 TO 'systemuser'@'%'
 ;

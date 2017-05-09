@@ -8,7 +8,7 @@ package core;
 import agent.AgentDAODB;
 import callRecord.CallType;
 import callRecord.CallTypeDAO;
-import callSession.EmergencyService;
+import callTransfers.EmergencyRoute;
 import caller.Caller;
 import caller.CallerDAO;
 import caller.CallerHistory;
@@ -92,7 +92,7 @@ public class RequestHandler extends HttpServlet {
 
                 break;
             case "emergencyService":
-                EmergencyService emergencyService = new EmergencyService();
+                EmergencyRoute emergencyService = new EmergencyRoute();
                 session.removeAttribute("emergencyService");
                 session.setAttribute("emergencyService", emergencyService);
                 nextLocation = "/emergencyservices.jsp";
