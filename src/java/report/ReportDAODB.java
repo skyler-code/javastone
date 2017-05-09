@@ -77,7 +77,8 @@ public class ReportDAODB implements ReportDAO {
         try {
             Connection conn = factory.getConnection(DatabaseType.MYSQL);
             
-            CallableStatement statement = conn.prepareCall("call sp_retrieve_report_calls_by_agent(userId)");
+            CallableStatement statement = conn.prepareCall("call sp_retrieve_report_calls_by_agent(?)");
+            statement.setInt(1, userId);
             ResultSet resultSet = statement.executeQuery();
             int callId;
             int agentId;

@@ -67,21 +67,23 @@ public class ReportHandler extends HttpServlet {
                     session.setAttribute("reportBean", reportMaker);
                     nextLocation = "clerk/reports/callType.jsp";
                 }
-//            case "Call by agent report":
-//                nextLocation = "clerk/reports/callAgent.jsp";
-//                String postedAgentId = request.getParameter("agentId");
-//                if (null == postedAgentId) {
-//                    postedCallType = ""; // first visit, just redirect to page
-//                    nextLocation = "clerk/reports/callAgent.jsp";
-//                } else {
-//                    nextLocation = "clerk/reports/callAgent.jsp";
-//                    reportMaker = new ReportMaker();
-//                    reportMaker.setAgentId(postedAgentId);
-//                    reportList = reportMaker.getCallAgentReport();
-//                    session.removeAttribute(postedAgentId);
-//                    session.setAttribute("reportBean", reportMaker);
-//                    nextLocation = "clerk/reports/callAgent.jsp";
-//                }
+                break;
+            case "Call by agent report":
+                nextLocation = "clerk/reports/callAgent.jsp";
+                String postedAgentId = request.getParameter("agentId");
+                if (null == postedAgentId) {
+                    postedCallType = ""; // first visit, just redirect to page
+                    nextLocation = "clerk/reports/callAgent.jsp";
+                } else {
+                    nextLocation = "clerk/reports/callAgent.jsp";
+                    reportMaker = new ReportMaker();
+                    reportMaker.setAgentId(postedAgentId);
+                    reportList = reportMaker.getCallAgentReport();
+                    session.removeAttribute(postedAgentId);
+                    session.setAttribute("reportBean", reportMaker);
+                    nextLocation = "clerk/reports/callAgent.jsp";
+                }
+                break;
         }
 
         request.getRequestDispatcher(nextLocation).forward(request, response);
