@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="authorizedUser" class="agent.Agent" scope="session" />
 <%@page import="agent.Agent"%>
 <!DOCTYPE html>
@@ -133,5 +134,7 @@
             <label for="newAccount">Add New Account</label>
             <input type="submit" name="newAccount"/>
         </form>
+        <a href='<c:url value="../RequestHandler" > <c:param name="task" value="report" /> </c:url>' >
+        Generate Reports</a>
     </body>
 </html>

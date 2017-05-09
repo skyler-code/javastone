@@ -56,6 +56,14 @@
         <servlet-name>ClerkHandler</servlet-name>
         <url-pattern>/clerk/ClerkHandler</url-pattern>
     </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>ReportHandler</servlet-name>
+        <url-pattern>/ReportHandler</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ReportHandler</servlet-name>
+        <servlet-class>report.ReportHandler</servlet-class>
+    </servlet>
     <session-config>
         <session-timeout>
             30

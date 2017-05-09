@@ -49,8 +49,13 @@ VALUES
 ("3192203056")
 ;
 
-
-
+INSERT INTO Caller (Caller_Phone, Caller_Notes, First_Name, Last_Name)
+VALUES
+	("3191112316", "Caller regarding something something", "Bill", "Smith"),
+	("5512345695", "Caller regarding something something", "Wendy", "Jones"),
+	("9915623455", "Caller regarding something something", "Chuck", "Angel"),
+	("3192203056", "Caller regarding something something", "Pat", "McFlurry")
+;
 
 CREATE TABLE App_User (
 	User_ID INT PRIMARY KEY AUTO_INCREMENT COMMENT 'The agent primary key'
@@ -158,7 +163,13 @@ CREATE TABLE Call_Record (
 ) COMMENT 'A record for a single call'
 ;
 
-
+INSERT INTO Call_Record (Call_ID, User_ID, Call_Description, Call_Type_Name, Caller_Phone, Start_Time, End_Time)
+VALUES
+	(10000, 1, "A caller describing their domestic assault", "Domestic Violence", "3191112316", '2017-03-24 18:25:00', '2017-03-24 19:25:00'),
+	(10001, 1, "A caller describing their domestic assault", "Domestic Violence", "5512345695", '2017-03-30 18:25:00', '2017-03-30 19:25:00'),
+	(10002, 2, "A caller with medium self harm risk", "Self Harm Threat (Medium)", "9915623455", '2017-04-05 18:25:00', '2017-04-05 18:55:00'),
+	(10003, 3, "A caller describing their addiction", "Drug Abuse", "3192203056", '2017-05-01 14:25:00', '2017-05-01 15:05:00')
+;
 
 -- Stored Procedures
 
@@ -388,7 +399,33 @@ BEGIN
 END$$
 DELIMITER ;
 
+DELIMITER $$
+DROP PROCEDURE IF EXISTS sp_retrieve_report_calls_by_call_type$$
+CREATE PROCEDURE sp_retrieve_report_calls_by_call_type(
+	IN p_call_type VARCHAR(50)
+)
+COMMENT 'Retrieves a report of calls by call type.'
+BEGIN
+	SELECT Call_ID, User_ID, Call_Description, Call_Type_Name, Caller_Phone, Start_Time, End_Time
+	FROM call_record
+    WHERE call_record.Call_Type_Name = p_call_type;
+	
+END$$
+DELIMITER ;
 
+DELIMITER $$
+DROP PROCEDURE IF EXISTS sp_retrieve_report_calls_by_agent$$
+CREATE PROCEDURE sp_retrieve_report_calls_by_agent(
+	IN p_user_id int
+)
+COMMENT 'Retrieves a report of all calls answered by the indicated agent.'
+BEGIN
+	SELECT Call_ID, User_ID, Call_Description, Call_Type_Name, Caller_Phone, Start_Time, End_Time
+	FROM call_record
+    WHERE call_record.User_ID = p_user_id;
+	
+END$$
+DELIMITER ;
 
 DROP USER IF EXISTS 'systemuser'@'%';
 CREATE USER 'systemuser'@'%' 
@@ -440,5 +477,11 @@ GRANT EXECUTE ON PROCEDURE Javastone.sp_update_user_password
 TO 'systemuser'@'%'
 ;
 GRANT EXECUTE ON PROCEDURE Javastone.sp_create_new_user
+TO 'systemuser'@'%'
+;
+GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_report_calls_by_call_type
+TO 'systemuser'@'%'
+;
+GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_report_calls_by_agent
 TO 'systemuser'@'%'
 ;

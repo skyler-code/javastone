@@ -16,7 +16,7 @@ public class CallRecordDTO {
     /**
      * The unique identifier for this call
      */
-    private int call_Id = 0;
+    private int callId = 0;
     
     /**
      * The unique id for the agent taking the call
@@ -56,7 +56,7 @@ public class CallRecordDTO {
     
     public CallRecordDTO(int callId, int agentId, String callerId, String callDescription, String callTypeName, LocalDateTime startTime, LocalDateTime endTime) {
         
-        this.call_Id = callId;
+        this.callId = callId;
         this.agent_id = agentId;
         this.caller_id = callerId;
         this.call_description = callDescription;
@@ -67,18 +67,18 @@ public class CallRecordDTO {
     
     /**
      * The unique identifier for this call
-     * @return the call_Id
+     * @return the callId
      */
-    public int getCall_Id() {
-        return call_Id;
+    public int getCallId() {
+        return callId;
     }
 
     /**
      * The unique identifier for this call
-     * @param call_Id the call_Id to set
+     * @param callId the callId to set
      */
-    public void setCall_Id(int call_Id) {
-        this.call_Id = call_Id;
+    public void setCallId(int callId) {
+        this.callId = callId;
     }
 
     /**
