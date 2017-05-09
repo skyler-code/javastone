@@ -20,6 +20,10 @@ CREATE TABLE Caller (
 ) COMMENT 'A caller record'
 ;
 
+INSERT INTO Caller(Caller_Phone, Caller_Notes, First_Name, Last_Name)
+VALUES('3192203056', 'Typically calls after a rager or whilst coming down from a pinger trip.','James','Edinburgh')
+;
+
 CREATE TABLE Call_Type (
 	Call_Type_Name VARCHAR(50) PRIMARY KEY COMMENT 'The call type primary key'
     , Description VARCHAR(1000) NOT NULL COMMENT 'A description of the call type'
@@ -163,12 +167,32 @@ CREATE TABLE Call_Record (
 ) COMMENT 'A record for a single call'
 ;
 
-INSERT INTO Call_Record (Call_ID, User_ID, Call_Description, Call_Type_Name, Caller_Phone, Start_Time, End_Time)
+INSERT INTO Call_Record(User_ID, Call_Description, Call_type_Name, Caller_Phone,Start_Time,End_Time)
 VALUES
-	(10000, 1, "A caller describing their domestic assault", "Domestic Violence", "3191112316", '2017-03-24 18:25:00', '2017-03-24 19:25:00'),
-	(10001, 1, "A caller describing their domestic assault", "Domestic Violence", "5512345695", '2017-03-30 18:25:00', '2017-03-30 19:25:00'),
-	(10002, 2, "A caller with medium self harm risk", "Self Harm Threat (Medium)", "9915623455", '2017-04-05 18:25:00', '2017-04-05 18:55:00'),
-	(10003, 3, "A caller describing their addiction", "Drug Abuse", "3192203056", '2017-05-01 14:25:00', '2017-05-01 15:05:00')
+(1,"Caller was very angry and verbally aggressive after drinking a shot of wine, he then passed out mid call.",'Alcohol Abuse','3192203056','2017-05-04 09:15:04','2017-05-04 9:20:10'),
+(1,"Caller was distressed after hitting his wife in the throat. The police were called and he cooperated",'Domestic Violence','3192203056','2017-05-04 9:25:04','2017-05-04 10:00:10'),
+(1, "A caller describing their domestic assault", "Domestic Violence", "3191112316", '2017-03-24 18:25:00', '2017-03-24 19:25:00'),
+(1, "A caller describing their domestic assault", "Domestic Violence", "5512345695", '2017-03-30 18:25:00', '2017-03-30 19:25:00'),
+(2, "A caller with medium self harm risk", "Self Harm Threat (Medium)", "9915623455", '2017-04-05 18:25:00', '2017-04-05 18:55:00'),
+(3, "A caller describing their addiction", "Drug Abuse", "3192203056", '2017-05-01 14:25:00', '2017-05-01 15:05:00')
+;
+
+
+CREATE TABLE EmergencySeviceLog (
+	Service_Provider_ID INT NOT NULL COMMENT 'Service Provider ID'
+    , User_ID INT NOT NULL COMMENT 'Agent that activated Emergency Service'
+    , Transfer_Time DATETIME NOT NULL COMMENT 'Time Call was transferred'
+    , PRIMARY KEY ( service_provider_id, user_id )
+    , FOREIGN KEY (service_provider_id) REFERENCES Service_Provider ( Service_Provider_ID)
+    , FOREIGN KEY ( user_id ) REFERENCES App_User ( User_ID )
+) COMMENT 'A caller record'
+;
+
+INSERT INTO EmergencySeviceLog ( Service_Provider_ID, User_ID, Transfer_Time )
+VALUES
+(1,3,'2012-05-05'),
+(2,3,'2015-06-01'),
+(3,3,'2017-06-20')
 ;
 
 -- Stored Procedures
@@ -409,7 +433,19 @@ BEGIN
 	SELECT Call_ID, User_ID, Call_Description, Call_Type_Name, Caller_Phone, Start_Time, End_Time
 	FROM call_record
     WHERE call_record.Call_Type_Name = p_call_type;
-	
+END$$
+DELIMITER ;
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS sp_retrieve_caller_history$$
+CREATE PROCEDURE sp_retrieve_caller_history(
+	IN p_phone_number varchar(10)
+)
+COMMENT 'Retrieve history of callers for a caller'
+BEGIN
+	SELECT Start_Time, End_Time, Call_Description, Call_Type_Name
+    FROM call_record
+    WHERE Caller_Phone = p_phone_number;
 END$$
 DELIMITER ;
 
@@ -474,6 +510,9 @@ GRANT EXECUTE ON PROCEDURE Javastone.sp_remove_incoming_call
 TO 'systemuser'@'%'
 ;
 GRANT EXECUTE ON PROCEDURE Javastone.sp_update_user_password
+TO 'systemuser'@'%'
+;
+GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_caller_history
 TO 'systemuser'@'%'
 ;
 GRANT EXECUTE ON PROCEDURE Javastone.sp_create_new_user

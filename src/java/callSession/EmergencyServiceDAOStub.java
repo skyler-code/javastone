@@ -7,7 +7,7 @@ import java.util.ArrayList;
  *
  * @author Michael Takrama
  */
-public class EmployeeServiceDAOStub implements EmployeeServiceDAO {
+public class EmergencyServiceDAOStub implements EmergencyServiceDAO {
     
     /**
      * A list of Emergency Services

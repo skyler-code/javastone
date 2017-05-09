@@ -20,9 +20,10 @@
         <script src="../js/jquery-3.2.1.min.js"></script>
         <script src="../js/active.js"></script>
     </head>
-    <body class="container">
+    <body>
         <jsp:include page="../includes/navbar.jsp"/>
-        <h1>Active Calls</h1>
+        <div class="container">
+            <h1>Active Calls</h1>
         <table id="calls" class="table">
                 <tr class="head">
                     <td>Call ID</td>
@@ -43,5 +44,6 @@
                 </tr>
             <% } %>
         </table>
+        </div>
     </body>
 </html>

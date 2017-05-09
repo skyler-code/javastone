@@ -41,10 +41,11 @@
         <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <title>Data Clerk Main</title>
     </head>
-    <body class="container">
+    <body>
+        
         <jsp:include page="../includes/navbar.jsp"/>
-
-        <form action="ClerkHandler" method="POST">
+        <div class="container">
+            <form action="ClerkHandler" method="POST">
             <p><br />To create an account for new employees, fill out fields below and click Add New Account</p>
             <p class="statusMessage">${message}</p>
 
@@ -134,7 +135,11 @@
             <label for="newAccount">Add New Account</label>
             <input type="submit" name="newAccount"/>
         </form>
+<<<<<<< HEAD
         <a href='<c:url value="../RequestHandler" > <c:param name="task" value="report" /> </c:url>' >
         Generate Reports</a>
+=======
+        </div>
+>>>>>>> origin/master
     </body>
 </html>

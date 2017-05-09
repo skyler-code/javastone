@@ -17,8 +17,10 @@
         <link href="css/bootstrapOverrides.css" rel="stylesheet" type="text/css"/>
         <title>Login</title>
     </head>
-    <body class="container">
-        <jsp:include page="includes/navbar.jsp"/>
+    <body>
+        
+        <jsp:include page="includes/navbar.jsp" />
+        <div class="container">
 
         <div class="container-fluid">
                 <div class="jumbotron">
@@ -42,7 +44,7 @@
                     </form>
                 </div>
             </div>
-        
+        </div>
             
     </body>
 </html>

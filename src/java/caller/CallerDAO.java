@@ -11,6 +11,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -74,4 +75,30 @@ public class CallerDAO {
         
         return rowsAffected;
     }
+
+    public ArrayList<CallerHistory> retrieveCallerHistory(String callerPhone) throws SQLException, ClassNotFoundException{
+        ArrayList<CallerHistory> historyList = new ArrayList<>();
+        
+        //Call the stored procedure
+        DatabaseConnectionFactory factory = DatabaseConnectionFactory.getInstance();
+        Connection conn = factory.getConnection(DatabaseType.MYSQL);
+        CallableStatement statement = conn.prepareCall("call sp_retrieve_caller_history(?)");
+        
+        statement.setString(1, callerPhone);
+        
+        ResultSet resultSet = statement.executeQuery();
+        while(resultSet.next()){
+            CallerHistory c = new CallerHistory();
+            c.setStartTime(resultSet.getTimestamp(1).toLocalDateTime());
+            c.setEndTime(resultSet.getTimestamp(2).toLocalDateTime());
+            c.setCallDescription(resultSet.getString(3));
+            c.setCallTypeName(resultSet.getString(4));
+            
+            historyList.add(c);
+        }
+        
+        return historyList;
+    }
+
+    
 }

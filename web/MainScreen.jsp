@@ -13,14 +13,17 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrapOverrides.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="css/navbar.css">
-        <title>JSP Page</title>
+        <title>${authorizedUser.firstName} ${authorizedUser.lastName}</title>
     </head>
-    <body class="container">
+    <body>
         <jsp:include page="includes/navbar.jsp" />
-        Welcome ${authorizedUser.firstName}! <br/>
-        <% if (authorizedUser.getRoles().contains(agent.Role.ADMINISTRATOR)){ %>
-        You shouldn't see this, unless you're an admin.
-        <% } %>
-        
+        <div class="container">
+            <div class="jumbotron container">
+            <label class="col-lg-12"><h3>Username:<small>${authorizedUser.username}</small></h3></label>
+            <label class="col-lg-12"><h3>Name:<small>${authorizedUser.firstName} ${authorizedUser.lastName}</small></h3></label>
+            <label class="col-lg-12"><h3>Address:<small>${authorizedUser.address}, ${authorizedUser.city}, ${authorizedUser.state}</small></h3></label>
+        </div> 
+        </div>
+               
     </body>
 </html>
