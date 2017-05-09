@@ -97,6 +97,9 @@ public class RequestHandler extends HttpServlet {
                 session.setAttribute("emergencyService", emergencyService);
                 nextLocation = "/emergencyservices.jsp";
                 break;
+            case "report":
+                nextLocation = "clerk/reportMaker.jsp";
+                break;
             default:
                 nextLocation = "/index.jsp";
         }

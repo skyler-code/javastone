@@ -21,7 +21,7 @@ CREATE TABLE Caller (
 ;
 
 INSERT INTO Caller(Caller_Phone, Caller_Notes, First_Name, Last_Name)
-VALUES('3192203056', 'Typically calls after a rager or whilst coming down from a pinger trip.','James','Edinburgh')
+VALUES('3192203099', 'Typically calls after a rager or whilst coming down from a pinger trip.','James','Edinburgh')
 ;
 
 CREATE TABLE Call_Type (
@@ -50,11 +50,17 @@ VALUES
 ("3191112316"),
 ("5512345695"),
 ("9915623455"),
-("3192203056")
+("3192203056"),
+("3192203099")
 ;
 
-
-
+INSERT INTO Caller (Caller_Phone, Caller_Notes, First_Name, Last_Name)
+VALUES
+	("3191112316", "Caller regarding something something", "Bill", "Smith"),
+	("5512345695", "Caller regarding something something", "Wendy", "Jones"),
+	("9915623455", "Caller regarding something something", "Chuck", "Angel"),
+	("3192203056", "Caller regarding something something", "Pat", "McFlurry")
+;
 
 CREATE TABLE App_User (
 	User_ID INT PRIMARY KEY AUTO_INCREMENT COMMENT 'The agent primary key'
@@ -165,7 +171,11 @@ CREATE TABLE Call_Record (
 INSERT INTO Call_Record(User_ID, Call_Description, Call_type_Name, Caller_Phone,Start_Time,End_Time)
 VALUES
 (1,"Caller was very angry and verbally aggressive after drinking a shot of wine, he then passed out mid call.",'Alcohol Abuse','3192203056','2017-05-04 09:15:04','2017-05-04 9:20:10'),
-(1,"Caller was distressed after hitting his wife in the throat. The police were called and he cooperated",'Domestic Violence','3192203056','2017-05-04 9:25:04','2017-05-04 10:00:10')
+(1,"Caller was distressed after hitting his wife in the throat. The police were called and he cooperated",'Domestic Violence','3192203056','2017-05-04 9:25:04','2017-05-04 10:00:10'),
+(1, "A caller describing their domestic assault", "Domestic Violence", "3191112316", '2017-03-24 18:25:00', '2017-03-24 19:25:00'),
+(1, "A caller describing their domestic assault", "Domestic Violence", "5512345695", '2017-03-30 18:25:00', '2017-03-30 19:25:00'),
+(2, "A caller with medium self harm risk", "Self Harm Threat (Medium)", "9915623455", '2017-04-05 18:25:00', '2017-04-05 18:55:00'),
+(3, "A caller describing their addiction", "Drug Abuse", "3192203056", '2017-05-01 14:25:00', '2017-05-01 15:05:00')
 ;
 
 
@@ -416,6 +426,19 @@ END$$
 DELIMITER ;
 
 DELIMITER $$
+DROP PROCEDURE IF EXISTS sp_retrieve_report_calls_by_call_type$$
+CREATE PROCEDURE sp_retrieve_report_calls_by_call_type(
+	IN p_call_type VARCHAR(50)
+)
+COMMENT 'Retrieves a report of calls by call type.'
+BEGIN
+	SELECT Call_ID, User_ID, Call_Description, Call_Type_Name, Caller_Phone, Start_Time, End_Time
+	FROM call_record
+    WHERE call_record.Call_Type_Name = p_call_type;
+END$$
+DELIMITER ;
+
+DELIMITER $$
 DROP PROCEDURE IF EXISTS sp_retrieve_caller_history$$
 CREATE PROCEDURE sp_retrieve_caller_history(
 	IN p_phone_number varchar(10)
@@ -429,6 +452,7 @@ END$$
 DELIMITER ;
 
 DELIMITER $$
+
 DROP PROCEDURE IF EXISTS sp_create_new_emergencylog$$
 CREATE PROCEDURE sp_create_new_emergencylog(
     IN p_service_provider_id VARCHAR(50),
@@ -454,6 +478,20 @@ BEGIN
 	SELECT Service_Provider_ID, User_ID, Transfer_Time, Note
 	FROM EmergencySeviceLog;
 END $$
+DELIMITER ;
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS sp_retrieve_report_calls_by_agent$$
+CREATE PROCEDURE sp_retrieve_report_calls_by_agent(
+	IN p_user_id int
+)
+COMMENT 'Retrieves a report of all calls answered by the indicated agent.'
+BEGIN
+	SELECT Call_ID, User_ID, Call_Description, Call_Type_Name, Caller_Phone, Start_Time, End_Time
+	FROM call_record
+    WHERE call_record.User_ID = p_user_id;
+	
+END$$
 DELIMITER ;
 
 
@@ -515,6 +553,12 @@ TO 'systemuser'@'%'
 GRANT EXECUTE ON PROCEDURE Javastone.sp_create_new_emergencylog 
 TO 'systemuser'@'%'
 ;
-GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_emergencylog 
+GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_emergencylog
+TO 'systemuser'@'%'
+; 
+GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_report_calls_by_call_type
+TO 'systemuser'@'%'
+;
+GRANT EXECUTE ON PROCEDURE Javastone.sp_retrieve_report_calls_by_agent
 TO 'systemuser'@'%'
 ;

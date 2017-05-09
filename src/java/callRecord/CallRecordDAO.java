@@ -26,7 +26,7 @@ public class CallRecordDAO {
      * Retrieve a list of all call types
      * @return
      */
-    public ArrayList<CallRecordDTO> getListCallRecords(){
+    public ArrayList<CallRecordDTO> getListCallRecords() throws SQLException {
         
         ArrayList<CallRecordDTO> callRecords = new ArrayList<>();
         

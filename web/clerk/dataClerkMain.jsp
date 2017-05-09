@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="authorizedUser" class="agent.Agent" scope="session" />
 <%@page import="agent.Agent"%>
 <!DOCTYPE html>
@@ -41,7 +42,6 @@
         <title>Data Clerk Main</title>
     </head>
     <body>
-        
         <jsp:include page="../includes/navbar.jsp"/>
         <div class="container">
             <form action="ClerkHandler" method="POST">
@@ -134,6 +134,10 @@
             <label for="newAccount">Add New Account</label>
             <input type="submit" name="newAccount"/>
         </form>
+        <div class="btn-link">
+        <a href='<c:url value="../RequestHandler" > <c:param name="task" value="report" /> </c:url>' >
+        Create Reports</a>
+        </div>
         </div>
     </body>
 </html>
