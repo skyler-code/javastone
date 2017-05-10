@@ -23,8 +23,10 @@
         <link href="css/navbar.css" rel="stylesheet" type="text/css"/>
         <title>Call Agent Report</title>
     </head>
-    <body class="container">
-        <h1>Call Agent Report</h1>
+    <body>
+        <jsp:include page="../../includes/navbar.jsp" />
+        <div class="container">
+            <h1>Call Agent Report</h1>
         <p>Enter the information to generate a report of all calls by on call type.</p>
         <section>
             <form action="ReportHandler" method="GET" class="form-inline">
@@ -37,8 +39,8 @@
             </form><br>
         </section>
         <div class="table-bordered">
-            <table border="1">
-                <tr>
+            <table class="table table-hover">
+                <thead>
                     <th> Call ID </th>
                     <th> User ID </th>
                     <th> Caller Phone </th>
@@ -46,7 +48,7 @@
                     <th> Call Type </th>
                     <th> Start time </th>
                     <th> End time </th>
-                </tr>
+                </thead>
                 <tbody>
                     <c:forEach var="callAR" items="${reportBean.callAgentReport}">
                         <tr>
@@ -72,6 +74,8 @@
             </table>
             <p>Item count ${reportBean.callAgentReport.size()}</p>
         </div>
+        </div>
+        
     </body>
 </html>
 

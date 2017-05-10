@@ -134,9 +134,6 @@
             <label for="newAccount">Add New Account</label>
             <input type="submit" name="newAccount"/>
         </form>
-        <div class="btn-link">
-        <a href='<c:url value="../RequestHandler" > <c:param name="task" value="report" /> </c:url>' >
-        Create Reports</a>
         </div>
         </div>
     </body>

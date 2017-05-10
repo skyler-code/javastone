@@ -19,8 +19,11 @@
         <link href="css/navbar.css" rel="stylesheet" type="text/css"/>
         <title>Report Maker</title>
     </head>
-    <body class="container">
-        <h1>Report Maker</h1>
+    
+    <body>
+        <jsp:include page="../includes/navbar.jsp" />
+        <div class="container">
+            <h1>Report Maker</h1>
         <form action="ReportHandler" method="GET" class="form-inline">
             <div class="form-group">
                 <label for="reportType" id="lblReportType">Select Report Type: </label><br>
@@ -33,5 +36,7 @@
                 <button type="submit" class="btn btn-primary" >Submit</button><br>
             </div>
         </form>
+
+        </div>
     </body>
 </html>

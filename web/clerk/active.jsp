@@ -33,7 +33,7 @@
             <% for (callRecord.CallRecordDTO call
                     : callRecord.CallRecordDAO.getOngoingCalls()) { %>
                 <tr>
-                    <td><%=call.getCall_Id()%></td>
+                    <td><%=call.getCallId()%></td>
                     <td><%=util.DurationUtility.formatDuration(
                             Duration.between(
                                     call.getStart_time(),

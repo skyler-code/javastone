@@ -6,11 +6,14 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="authorizedUser" class="agent.Agent" scope="session" />
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="navbar">
     <ul>
     <% if (authorizedUser.getRoles().contains(agent.Role.DATACLERK)) { %>
     <li><a href="/JavaStone/clerk/active.jsp">Ongoing</a></li>
     <li><a href="/JavaStone/clerk/dataClerkMain.jsp">Data Clerk</a></li>
+    <li><a href='<c:url value="../../JavaStone/RequestHandler" > <c:param name="task" value="report" /> </c:url>' >
+        Create Reports</a></li>
     <% } %>
     <% if (authorizedUser.getRoles().contains(agent.Role.AGENT)) { %>
     <li><a href="/JavaStone/incomingCalls.jsp">Incoming</a></li>
